@@ -33,6 +33,21 @@
             }
         }
 
+        //verificando se o usuário esta logado
+        public function logado($idUser){
+
+            $pdo = conexao();
+            $result = array();
+            $dados = $pdo->prepare("SELECT user FROM usuario WHERE idusuario = :idUser");
+            $dados->bindValue('idUser', $idUser);
+            $dados->execute();
+
+            if ($dados->rowCount() > 0) {
+                $result  = $dados->fetch(PDO::FETCH_ASSOC);
+            }
+            return $result;
+        }
+        
       // exit destrói a seção do usuário
         public function exit(){
             session_start();
