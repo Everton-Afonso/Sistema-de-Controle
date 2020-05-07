@@ -15,6 +15,14 @@
             return $result;
 
         }
+        //delete
+          public function deleteItens($idIten){
+
+            $pdo = conexao();
+            $delete = $pdo->prepare("DELETE FROM itens WHERE iditens = :idIten");
+            $delete->bindValue('idIten', $idIten);
+            $delete->execute();
+        }
   }
 
 ?>
