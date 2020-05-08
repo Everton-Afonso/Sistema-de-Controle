@@ -65,6 +65,28 @@
             return $result;
 
         }
+
+        //insert
+        public function insertComponentes($user, $description, $idUser){
+
+            $pdo = conexao();
+            //verificando se o componente ja foi cadastrado
+            $select = $pdo->prepare("SELECT idcomponentes FROM componentes WHERE nome = :user");
+            $select->bindValue('user', $user);
+            $select->execute();
+
+            if ($select->rowCount() > 0) { // componente já existe no DB
+                return false;
+            } else { // componente não existe no DB
+                $insert = $pdo->prepare("INSERT INTO componentes(nome, descricao, usuario_idusuario) VALUES (:user, :descrip, :idUser)");
+                $insert->bindValue('user', $user);
+                $insert->bindValue('descrip', $description);
+                $insert->bindValue('idUser', $idUser);
+                $insert->execute();
+                
+                return true;
+            }
+        }
     }
 
 ?>
