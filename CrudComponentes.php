@@ -54,6 +54,17 @@
             session_destroy();
             header('location: index.php');
         }
+
+        //select 
+        public function selectComponentes(){
+
+            $pdo = conexao();
+            $result = array();
+            $select = $pdo->query("SELECT * FROM componentes ORDER BY nome");
+            $result = $select->fetchAll(PDO::FETCH_ASSOC);
+            return $result;
+
+        }
     }
 
 ?>
