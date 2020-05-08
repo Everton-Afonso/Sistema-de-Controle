@@ -1,102 +1,182 @@
-.card-image .card{
-    min-height: 0;
+.card-image .card {
+  min-height: 0;
 }
-.login-form h6{
-    font-size: 15px;
-    text-transform: uppercase;
-    font-weight: 500;
+.login-form h6 {
+  font-size: 15px;
+  text-transform: uppercase;
+  font-weight: 500;
 }
-.textbox{
-    width: 100%;
-    height: 50px;
-    position: relative;
-    margin-top: 15px;
+.textbox {
+  width: 100%;
+  height: 50px;
+  position: relative;
+  margin-top: 15px;
 }
-.textbox input{
-    width: 100%;
-    height: 50px;
-    border: none;
-    background: rgba(43, 43, 43, 0.7);
-    padding: 0 15px;
-    font-size: 16px;
-    outline: none;
-    color: #f4f4ff;
+.textbox input {
+  width: 100%;
+  height: 50px;
+  border: none;
+  background: rgba(43, 43, 43, 0.7);
+  padding: 0 15px;
+  font-size: 16px;
+  outline: none;
+  color: #f4f4ff;
 }
-.textbox input:focus{
-    background: rgba(72, 72, 68, 0.6) !important;
+.textbox input:focus {
+  background: rgba(72, 72, 68, 0.6) !important;
 }
-.check-message{
-    position: absolute;
-    top: 70%;
-    right: 10px;
-    color: #fff;
-    transform: translateY(-50%);
+.check-message {
+  position: absolute;
+  top: 70%;
+  right: 10px;
+  color: #fff;
+  transform: translateY(-50%);
 }
-.textbox input:focus + .check-message{
-    display: none;
+.textbox input:focus + .check-message,
+.textboxregister input:focus + .check-message-register {
+  display: none;
 }
-.options{
-    margin-top: 15px;
-    color: #f4f4f4;
-    overflow: hidden;
-    font-size: 14px;
+.options {
+  margin-top: 15px;
+  color: #f4f4f4;
+  overflow: hidden;
+  font-size: 14px;
 }
-.remember-me{
-    float: left;
-    display: flex;
-    align-items: center;
-    cursor: pointer;
+.checkbox {
+  display: inline-block;
+  width: 20px;
+  height: 20px;
+  background: #484848;
+  margin-right: 15px;
+  position: relative;
 }
-.checkbox{
-    display: inline-block;
-    width: 20px;
-    height: 20px;
-    background: #484848;
-    margin-right: 15px;
-    position: relative;
+.checkbox input {
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+  cursor: pointer;
 }
-.checkbox input{
-    width: 100%;
-    height: 100%;
-    opacity: 0;
-    cursor: pointer;
+.checked {
+  position: absolute;
+  left: 8px;
+  top: 4px;
+  width: 5px;
+  height: 10px;
+  border: solid #fff;
+  border-width: 0 1px 1px 0;
+  transform: rotate(45deg);
+  display: none;
 }
-.checked{
-    position: absolute;
-    left: 8px;
-    top: 4px;
-    width: 5px;
-    height: 10px;
-    border: solid #fff;
-    border-width: 0 1px 1px 0;
-    transform: rotate(45deg);
-    display: none;
-}
-.checkbox input:checked + .checked{
-    display: block;
+.checkbox input:checked + .checked {
+  display: block;
 }
 .options a {
-    color: #f4f4f480;
+  color: #f4f4f480;
 }
-.login-btn{
-    width: 30%;
-    height: 40px;
-    margin-top: 30px;
-    background: rgba(25, 25, 25, 0.7);
-    border: none;
-    outline: none;
-    cursor: pointer;
-    text-transform: uppercase;
-    font-weight: 700;
-    transition: .3s linear;
+.login-btn {
+  width: 30%;
+  height: 40px;
+  margin-top: 30px;
+  background: rgba(25, 25, 25, 0.7);
+  border: none;
+  outline: none;
+  cursor: pointer;
+  text-transform: uppercase;
+  font-weight: 700;
+  transition: 0.3s linear;
 }
-.login-btn.active{
-    background: #037bee;
-    color: #fff;
+.login-btn.active,
+.register-btn.active {
+  background: #037bee;
+  color: #fff;
 }
-.login-btn.active:hover{
-    opacity: .7;
+.login-btn.active:hover,
+.register-btn.active:hover {
+  opacity: 0.7;
 }
-.hidden{
-    display: none;
+.hidden {
+  display: none;
+}
+.erro {
+  color: #ff0000;
+  padding-top: 12px;
+  font-weight: 700;
+}
+/* ----------- Tela cadastro -----------  */
+.container-register {
+  display: flex;
+}
+.form-register {
+  width: 330px;
+  padding: 20px;
+  margin: 30px auto;
+  border: 1px solid rgba(0, 0, 0, 0.3);
+}
+.form-register h3 {
+  text-align: center;
+  margin-top: 5px;
+  margin-bottom: 10px;
+  font-weight: 700;
+}
+.form-register label {
+  margin-top: 2px;
+  margin-bottom: 2px;
+}
+.textboxregister label,
+input {
+  display: block;
+  outline: none;
+  line-height: 25px;
+  width: 100%;
+}
+.textboxregister {
+  position: relative;
+}
+.textboxregister input {
+  padding: 0 15px;
+}
+.check-message-register {
+  position: absolute;
+  top: 75%;
+  right: 10px;
+  transform: translateY(-50%);
+}
+.register-btn {
+  height: 40px;
+  margin-top: 30px;
+  background: rgba(25, 25, 25, 0.7);
+  border: none;
+  outline: none;
+  cursor: pointer;
+  text-transform: uppercase;
+  font-weight: 700;
+  transition: 0.3s linear;
+}
+table {
+  width: 90%;
+  margin: auto;
+}
+tr {
+  line-height: 30px;
+}
+#title-register {
+  font-weight: bold;
+  width: 330px;
+  border: 1px solid rgba(0, 0, 0, 0.3);
+  text-align: center;
+}
+a {
+  text-decoration: none;
+  padding: 5px;
+  margin: 0px 5px;
+  color: #000;
+}
+td {
+  text-align: center;
+}
+#to-edit:hover {
+  color: #008000;
+}
+#delete:hover {
+  color: #ff0000;
 }
