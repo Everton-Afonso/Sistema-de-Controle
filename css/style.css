@@ -173,6 +173,7 @@ a {
 }
 td {
   text-align: center;
+  border: 1px solid rgba(0, 0, 0, 0.3);
 }
 #to-edit:hover {
   color: #008000;

@@ -1,8 +1,8 @@
 <?php
 
     require_once 'verifica.php';
-    require_once 'CrudItens.php';
-    $itens = new Itens();
+    require_once 'CrudEstoque.php';
+    $estoque = new Estoque();
 
 ?>
 <!DOCTYPE html>
@@ -112,22 +112,24 @@
                         <table>
                                 <tr id="title-register">
                                     <td id="title-register">Nome</td>
-                                    <td id="title-register" colspan="2">Quantidade</td>
+                                    <td id="title-register">Quantidade</td> 
+                                    <td id="title-register">Descrição</td> 
+                                    <td id="title-register">Funções</td> 
                                 </tr>
                             <?php
-                                $dados = $itens->selectItens();
+                                $dados = $estoque->selectEstoque();
                                 if(count($dados) > 0){
                                     for ($i=0; $i < count($dados); $i++) { 
                                         echo "<tr>";
                                         foreach ($dados[$i] as $key => $value) {
-                                            if ($key != "iditens") {
+                                            if ($key != "idestoque") {
                                                 echo "<td>".$value."</td>";
                                             }
                                         }
                             ?>
                                         <td>
                                             <a href="" id="to-edit">Editar</a>
-                                            <a href="itens.php?id=<?php echo $dados[$i]["iditens"];?>" id="delete">Excluir</a> <!-- pedgando iditens para poder exclui-lo -->
+                                            <a href="estoque.php?id=<?php echo $dados[$i]["idestoque"];?>" id="delete">Excluir</a> <!-- pegando idestoque para poder exclui-lo -->
                                         </td>
                             <?php
                                         echo "</tr>";
@@ -252,8 +254,8 @@
 <?php
 // vefificando se o iditens foi pego corretamente, caso ele tenha sido pego a função deleteItens irá exclui-lo
     if (isset($_GET["id"])) {
-        $idItens = addslashes($_GET["id"]);
-        $itens->deleteItens($idItens);
-        header("Location: itens.php");
-    }
+            $idEstoque = addslashes($_GET["id"]);
+            $estoque->deleteEstoque($idEstoque);
+            header("Location: estoque.php");
+        }
 ?>

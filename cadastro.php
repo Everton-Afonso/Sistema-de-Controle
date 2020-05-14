@@ -64,8 +64,8 @@
             <div class="collapse navbar-collapse">
                 <ul class="navbar-nav ml-auto">
                     <li class="nav-item">
-                        <a class="nav-link" href="itens.php"
-                            data-scroll="true">Itens</a>
+                        <a class="nav-link" href="estoque.php"
+                            data-scroll="true">Estoque</a>
                     </li>
                     <li class="nav-item">
                         <a class="btn btn-warning" href="logout.php">
@@ -100,10 +100,11 @@
                                     if (isset($_POST['name'])) { 
                                         $name = addslashes($_POST['name']);
                                         $description = addslashes($_POST['description']);
+                                        $quantidade = addslashes($_POST['quantidade']);
                                         $idUser = addslashes($_SESSION['id']);
 
-                                        if (!empty($name) && !empty($description)) {
-                                            if(!$componentes->insertComponentes($name, $description, $idUser)){
+                                        if (!empty($name) && !empty($description) && !empty($quantidade)) {
+                                            if(!$componentes->insertComponentes($name, $description, $quantidade, $idUser)){
                                 ?>
                                                 <p class="erro text-center">
                                                     <?php
@@ -133,6 +134,11 @@
                                     <input type="text" name="description" id="description">
                                     <span class="check-message-register hidden">Obrigatório</span>
                                 </div>
+                                <div class="textboxregister">
+                                    <label for="quantidade">Quantidade</label>
+                                    <input type="text" name="quantidade" id="quantidade">
+                                    <span class="check-message-register hidden">Obrigatório</span>
+                                </div>
                                 <input type="submit" value="Cadastrar" name="login" id="login" class="register-btn" disabled>
                             </form>
                         </section>
@@ -140,7 +146,9 @@
                         <table>
                                 <tr id="title-register">
                                     <td id="title-register">Nome</td>
-                                    <td id="title-register" colspan="2">Descrição</td>
+                                    <td id="title-register">Descrição</td>
+                                    <td id="title-register">Quantidade</td>
+                                    <td id="title-register">Editar</td>
                                 </tr>
                             <?php
                                 $dados = $componentes->selectComponentes();
@@ -238,7 +246,7 @@
         </div>
     </footer>
     <!-- footer fim -->
-    <!-- srcipts da tela logio -->
+    <!-- srcipts da tela cadastro -->
     <script type="text/javascript">
         $(".textboxregister input").focusout(function () {
             if ($(this).val() == "") {
@@ -249,7 +257,7 @@
         });
         $(".textboxregister input").keyup(function () {
             let inputs = $(".textboxregister input");
-            if (inputs[0].value != "" && inputs[1].value) {
+            if (inputs[0].value != "" && inputs[1].value && inputs[2].value) {
                 $(".register-btn").attr("disabled", false);
                 $(".register-btn").addClass("active");
             } else {
