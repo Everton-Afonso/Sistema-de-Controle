@@ -1,183 +1,258 @@
 .card-image .card {
-  min-height: 0;
+	min-height: 0;
 }
 .login-form h6 {
-  font-size: 15px;
-  text-transform: uppercase;
-  font-weight: 500;
+	font-size: 15px;
+	text-transform: uppercase;
+	font-weight: 500;
 }
 .textbox {
-  width: 100%;
-  height: 50px;
-  position: relative;
-  margin-top: 15px;
+	width: 100%;
+	height: 50px;
+	position: relative;
+	margin-top: 15px;
 }
 .textbox input {
-  width: 100%;
-  height: 50px;
-  border: none;
-  background: rgba(43, 43, 43, 0.7);
-  padding: 0 15px;
-  font-size: 16px;
-  outline: none;
-  color: #f4f4ff;
+	width: 100%;
+	height: 50px;
+	border: none;
+	background: rgba(43, 43, 43, 0.7);
+	padding: 0 15px;
+	font-size: 16px;
+	outline: none;
+	color: #f4f4ff;
 }
 .textbox input:focus {
-  background: rgba(72, 72, 68, 0.6) !important;
+	background: rgba(72, 72, 68, 0.6) !important;
 }
 .check-message {
-  position: absolute;
-  top: 70%;
-  right: 10px;
-  color: #fff;
-  transform: translateY(-50%);
+	position: absolute;
+	top: 70%;
+	right: 10px;
+	color: #fff;
+	transform: translateY(-50%);
 }
 .textbox input:focus + .check-message,
 .textboxregister input:focus + .check-message-register {
-  display: none;
+	display: none;
 }
 .options {
-  margin-top: 15px;
-  color: #f4f4f4;
-  overflow: hidden;
-  font-size: 14px;
+	margin-top: 15px;
+	color: #f4f4f4;
+	overflow: hidden;
+	font-size: 14px;
 }
 .checkbox {
-  display: inline-block;
-  width: 20px;
-  height: 20px;
-  background: #484848;
-  margin-right: 15px;
-  position: relative;
+	display: inline-block;
+	width: 20px;
+	height: 20px;
+	background: #484848;
+	margin-right: 15px;
+	position: relative;
 }
 .checkbox input {
-  width: 100%;
-  height: 100%;
-  opacity: 0;
-  cursor: pointer;
+	width: 100%;
+	height: 100%;
+	opacity: 0;
+	cursor: pointer;
 }
 .checked {
-  position: absolute;
-  left: 8px;
-  top: 4px;
-  width: 5px;
-  height: 10px;
-  border: solid #fff;
-  border-width: 0 1px 1px 0;
-  transform: rotate(45deg);
-  display: none;
+	position: absolute;
+	left: 8px;
+	top: 4px;
+	width: 5px;
+	height: 10px;
+	border: solid #fff;
+	border-width: 0 1px 1px 0;
+	transform: rotate(45deg);
+	display: none;
 }
 .checkbox input:checked + .checked {
-  display: block;
+	display: block;
 }
 .options a {
-  color: #f4f4f480;
+	color: #f4f4f480;
 }
 .login-btn {
-  width: 30%;
-  height: 40px;
-  margin-top: 30px;
-  background: rgba(25, 25, 25, 0.7);
-  border: none;
-  outline: none;
-  cursor: pointer;
-  text-transform: uppercase;
-  font-weight: 700;
-  transition: 0.3s linear;
+	width: 30%;
+	height: 40px;
+	margin-top: 30px;
+	background: rgba(25, 25, 25, 0.7);
+	border: none;
+	outline: none;
+	cursor: pointer;
+	text-transform: uppercase;
+	font-weight: 700;
+	transition: 0.3s linear;
 }
 .login-btn.active,
 .register-btn.active {
-  background: #037bee;
-  color: #fff;
+	background: #037bee;
+	color: #fff;
 }
 .login-btn.active:hover,
 .register-btn.active:hover {
-  opacity: 0.7;
+	opacity: 0.7;
 }
 .hidden {
-  display: none;
+	display: none;
 }
+/*apagar*/
 .erro {
-  color: #ff0000;
-  padding-top: 12px;
-  font-weight: 700;
+	color: #ff0000;
+	padding-top: 12px;
+	font-weight: 700;
 }
 /* ----------- Tela cadastro -----------  */
 .container-register {
-  display: flex;
+	display: flex;
 }
+/* foi add essa parte para que o formulario e a tabala fucasem na mesma altura */
+.container-register #left {
+	margin-top: -1.85rem;
+}
+/* criado*/
+.alert-erro {
+	background-color: rgba(255, 0, 0, 0.7);
+	padding: 20px 40px;
+	min-width: 320px;
+	position: absolute;
+	right: 0px;
+	top: -0rem;
+	overflow: hidden;
+	border-radius: 4px;
+	border-left: 8px solid #f00e0e;
+	color: white;
+}
+.alert-erro .fa-exclamation-triangle {
+	position: absolute;
+	left: 18px;
+	top: 50%;
+	transform: translateY(-50%);
+}
+.alert-erro .msg {
+	padding: 0 12px;
+	font-weight: 700;
+}
+.alert-erro .close-btn {
+	position: absolute;
+	padding: 30px 20px;
+	right: 0px;
+	top: 50%;
+	transform: translateY(-50%);
+	background: #f00e0e;
+}
+.alert-acerto {
+	background-color: rgba(50, 205, 50, 0.7);
+	padding: 20px 40px;
+	min-width: 320px;
+	position: absolute;
+	right: 0px;
+	top: -0rem;
+	overflow: hidden;
+	border-radius: 4px;
+	border-left: 8px solid #238e23;
+	color: white;
+}
+.alert-acerto .fa-exclamation-triangle {
+	position: absolute;
+	left: 18px;
+	top: 50%;
+	transform: translateY(-50%);
+}
+.alert-acerto .msg {
+	padding: 0 12px;
+	font-weight: 700;
+}
+.alert-acerto .close-btn {
+	position: absolute;
+	padding: 30px 20px;
+	right: 0px;
+	top: 50%;
+	transform: translateY(-50%);
+	background: #238e23;
+}
+/* ate aqui*/
 .form-register {
-  width: 330px;
-  padding: 20px;
-  margin: 30px auto;
-  border: 1px solid rgba(0, 0, 0, 0.3);
+	width: 330px;
+	padding: 20px;
+	margin: 30px auto;
+	border: 1px solid rgba(0, 0, 0, 0.3);
 }
 .form-register h3 {
-  text-align: center;
-  margin-top: 5px;
-  margin-bottom: 10px;
-  font-weight: 700;
+	text-align: center;
+	margin-top: 5px;
+	margin-bottom: 10px;
+	font-weight: 700;
 }
 .form-register label {
-  margin-top: 2px;
-  margin-bottom: 2px;
+	margin-top: 2px;
+	margin-bottom: 2px;
 }
 .textboxregister label,
-input {
-  display: block;
-  outline: none;
-  line-height: 25px;
-  width: 100%;
+input,
+select {
+	display: block;
+	outline: none;
+	line-height: 25px;
+	width: 100%;
+}
+.textboxregister label,
+select {
+	height: 30px;
 }
 .textboxregister {
-  position: relative;
+	position: relative;
 }
 .textboxregister input {
-  padding: 0 15px;
+	padding: 0 15px;
 }
 .check-message-register {
-  position: absolute;
-  top: 75%;
-  right: 10px;
-  transform: translateY(-50%);
+	position: absolute;
+	top: 75%;
+	right: 10px;
+	transform: translateY(-50%);
+	/* add */
+	color: red;
+	font-weight: 700;
 }
 .register-btn {
-  height: 40px;
-  margin-top: 30px;
-  background: rgba(25, 25, 25, 0.7);
-  border: none;
-  outline: none;
-  cursor: pointer;
-  text-transform: uppercase;
-  font-weight: 700;
-  transition: 0.3s linear;
+	height: 40px;
+	margin-top: 30px;
+	background: rgba(25, 25, 25, 0.7);
+	border: none;
+	outline: none;
+	cursor: pointer;
+	text-transform: uppercase;
+	font-weight: 700;
+	transition: 0.3s linear;
 }
 table {
-  width: 90%;
-  margin: auto;
+	width: 90%;
+	margin: auto;
 }
 tr {
-  line-height: 30px;
+	line-height: 30px;
 }
 #title-register {
-  font-weight: bold;
-  width: 330px;
-  border: 1px solid rgba(0, 0, 0, 0.3);
-  text-align: center;
+	font-weight: bold;
+	width: 330px;
+	border: 1px solid rgba(0, 0, 0, 0.3);
+	text-align: center;
 }
 a {
-  text-decoration: none;
-  padding: 5px;
-  margin: 0px 5px;
-  color: #000;
+	text-decoration: none;
+	padding: 5px;
+	margin: 0px 5px;
+	color: #000;
 }
 td {
-  text-align: center;
-  border: 1px solid rgba(0, 0, 0, 0.3);
+	text-align: center;
+	border: 1px solid rgba(0, 0, 0, 0.3);
 }
 #to-edit:hover {
-  color: #008000;
+	color: #008000;
 }
 #delete:hover {
-  color: #ff0000;
+	color: #ff0000;
 }
