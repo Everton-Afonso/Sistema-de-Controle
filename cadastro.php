@@ -32,6 +32,7 @@
     <link href="https://info.mch.ifsuldeminas.edu.br/wp-content/themes/informatica/assets/css/style.css"
         rel="stylesheet">
     <link rel="stylesheet" href="css/style.css">
+    <script src="https://kit.fontawesome.com/a076d05399.js"></script>
 
 
     <!--     Fonts and icons     -->
@@ -93,37 +94,50 @@
             <div class="section section-gray">
                 <div class="container-fluid">
                     <section class="container-register row">
+                        <?php
+                            if (isset($_POST['name'])) { 
+                                $name = addslashes($_POST['name']);
+                                $description = addslashes($_POST['description']);
+                                $idUser = addslashes($_SESSION['id']);
+
+                                if (!empty($name) && !empty($description)) {
+                                    $name = ucwords(strtolower($name));
+                                    $description = ucwords(strtolower($description));
+                                    if(!$componentes->insertComponentes($name, $description, $idUser)){
+                                        ?>
+                                        <div class="alert-erro">
+                                            <span class="fas fa-exclamation-triangle"></span>
+                                            <span class="msg">Componente já esta cadastrado</span>
+                                            <span class="close-btn">
+                                                <span class="fa-time"></span>
+                                            </span>
+                                        </div>
+                        <?php
+                                    }else {
+                        ?>
+                                            <div class="alert-acerto">
+                                                <span class="fas fa-exclamation-triangle"></span>
+                                                <span class="msg">Componente cadastrado com sucesso</span>
+                                                <span class="close-btn">
+                                                    <span class="fa-time"></span>
+                                                </span>
+                                            </div>
+                        <?php                
+                                }
+                                } else {
+                        ?>
+                                    <p class="erro text-center">
+                                        <?php
+                                            echo "Preencha todos os dados";
+                                        ?>
+                                    </p>
+                        <?php
+                                }
+                            }
+                        ?>
                         <section id="left" class="col-md-4">
                             <form method="POST" class="form-register">
                                 <h3>Cadastro de Componentes</h3>
-                                <?php
-                                    if (isset($_POST['name'])) { 
-                                        $name = addslashes($_POST['name']);
-                                        $description = addslashes($_POST['description']);
-                                        $quantidade = addslashes($_POST['quantidade']);
-                                        $idUser = addslashes($_SESSION['id']);
-
-                                        if (!empty($name) && !empty($description) && !empty($quantidade)) {
-                                            if(!$componentes->insertComponentes($name, $description, $quantidade, $idUser)){
-                                ?>
-                                                <p class="erro text-center">
-                                                    <?php
-                                                        echo "Componente já esta cadastrado";
-                                                    ?> 
-                                                </p>
-                                <?php
-                                            }
-                                        } else {
-                                ?>
-                                            <p class="erro text-center">
-                                                <?php
-                                                    echo "Preencha todos os dados";
-                                                ?>
-                                            </p>
-                                <?php
-                                        }
-                                    }
-                                ?>
                                 <div class="textboxregister">
                                     <label for="name">Nome</label>
                                     <input type="text" name="name" id="name">
@@ -134,11 +148,6 @@
                                     <input type="text" name="description" id="description">
                                     <span class="check-message-register hidden">Obrigatório</span>
                                 </div>
-                                <div class="textboxregister">
-                                    <label for="quantidade">Quantidade</label>
-                                    <input type="text" name="quantidade" id="quantidade">
-                                    <span class="check-message-register hidden">Obrigatório</span>
-                                </div>
                                 <input type="submit" value="Cadastrar" name="login" id="login" class="register-btn" disabled>
                             </form>
                         </section>
@@ -147,7 +156,6 @@
                                 <tr id="title-register">
                                     <td id="title-register">Nome</td>
                                     <td id="title-register">Descrição</td>
-                                    <td id="title-register">Quantidade</td>
                                     <td id="title-register">Editar</td>
                                 </tr>
                             <?php
@@ -257,7 +265,7 @@
         });
         $(".textboxregister input").keyup(function () {
             let inputs = $(".textboxregister input");
-            if (inputs[0].value != "" && inputs[1].value && inputs[2].value) {
+            if (inputs[0].value != "" && inputs[1].value) {
                 $(".register-btn").attr("disabled", false);
                 $(".register-btn").addClass("active");
             } else {
