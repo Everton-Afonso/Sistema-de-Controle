@@ -67,23 +67,22 @@
         }
 
         //insert
-        public function insertComponentes($user, $description, $quantidade, $idUser){
+        public function insertComponentes($name, $description, $idUser){
 
             $pdo = conexao();
             //verificando se o componente ja foi cadastrado
-            $select = $pdo->prepare("SELECT idcomponentes FROM componentes WHERE nome = :user");
-            $select->bindValue('user', $user);
+            $select = $pdo->prepare("SELECT idcomponentes FROM componentes WHERE nome = :nome");
+            $select->bindValue('nome', $name);
             $select->execute();
 
             if ($select->rowCount() > 0) { // componente já existe no DB
                 return false;
             } else { // componente não existe no DB
-                $insert = $pdo->prepare("INSERT INTO componentes(nome, descricao, quantidade, 
-                usuario_idusuario) VALUES (:user, :descrip, :quantidade, :idUser)");
+                $insert = $pdo->prepare("INSERT INTO componentes(nome, descricao, 
+                usuario_idusuario) VALUES (:nome, :descrip, :idUser)");
 
-                $insert->bindValue('user', $user);
+                $insert->bindValue('nome', $name);
                 $insert->bindValue('descrip', $description);
-                $insert->bindValue('quantidade', $quantidade);
                 $insert->bindValue('idUser', $idUser);
                 $insert->execute();
                 
