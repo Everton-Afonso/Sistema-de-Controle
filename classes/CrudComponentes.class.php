@@ -1,8 +1,8 @@
 <?php
 
-    require_once './conexao/conexao.php'; 
+    require_once "conexao/conexao.php"; 
 
-    Class Componentes{
+    Class Componente{
 
       //verifica se o usuário efetuou o login com sucesso 
         public function login($user, $pass){
@@ -33,7 +33,7 @@
             }
         }
 
-        //verificando se o usuário esta logado
+        //verificando se o usuário esta logado no sistema
         public function logado($idUser){
 
             $pdo = conexao();
@@ -48,14 +48,14 @@
             return $result;
         }
         
-      // exit destrói a seção do usuário
+      // logout do sistema destrói a seção do usuário
         public function exit(){
             session_start();
             session_destroy();
             header('location: index.php');
         }
 
-        //select 
+        //seleciona todos os dados da tabela componentes 
         public function selectComponentes(){
 
             $pdo = conexao();
@@ -66,7 +66,18 @@
 
         }
 
-        //insert
+        //seleciona uma certa quantidade de dados para exibir na paginação da tabela
+        public function selectComponentesLimit($inicio, $limit){
+
+            $pdo = conexao();
+            $result = array();
+            $select = $pdo->query("SELECT * FROM componentes ORDER BY nome LIMIT $inicio, $limit");
+            $result = $select->fetchAll(PDO::FETCH_ASSOC);
+            return $result;
+
+        }
+
+        //insere os dados na tabela componentes
         public function insertComponentes($name, $description, $idUser){
 
             $pdo = conexao();
