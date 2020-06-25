@@ -111,6 +111,15 @@
                                             <div class="card-body img-content-center-p">
                                                 <div class="login-form">
                                                     <h6>Login</h6>
+                                                    <!-- alterando a mensagem de erro para que ela apareca depois do titulo login-->
+                                                    <p class="erro">
+                                                        <?php
+                                                            if (isset($_SESSION['loginErro'])) {
+                                                                echo $_SESSION['loginErro'];
+                                                                unset($_SESSION['loginErro']);
+                                                            }
+                                                        ?>
+                                                    </p>
                                                     <form action="login.php" method="POST">
                                                         <div class="textbox">
                                                             <input type="text" name="user" id="user" placeholder="Usuário">
@@ -122,14 +131,6 @@
                                                         </div>
                                                         <input type="submit" value="Entrar" name="login" id="login" class="login-btn" disabled>
                                                     </form>
-                                                    <p class="erro">
-                                                        <?php
-                                                            if (isset($_SESSION['loginErro'])) {
-                                                                echo $_SESSION['loginErro'];
-                                                                unset($_SESSION['loginErro']);
-                                                            }
-                                                        ?>
-                                                    </p>
                                                 </div>
                                             </div>
                                         </div>

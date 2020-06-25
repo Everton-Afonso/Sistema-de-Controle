@@ -1,8 +1,11 @@
 <?php
 
     require_once 'verifica.php';
-    require_once 'CrudEstoque.php';
+    require_once './classes/CrudEstoque.class.php';
+    require_once './classes/CrudComponentes.class.php';
+
     $estoque = new Estoque();
+    $componentes = new Componente();
 
 ?>
 <!DOCTYPE html>
@@ -32,7 +35,7 @@
     <link href="https://info.mch.ifsuldeminas.edu.br/wp-content/themes/informatica/assets/css/style.css"
         rel="stylesheet">
     <link rel="stylesheet" href="css/style.css">
-
+    <script src="https://kit.fontawesome.com/a076d05399.js"></script>
 
     <!--     Fonts and icons     -->
     <link href="https://fonts.googleapis.com/css?family=Montserrat:400,300,700" rel="stylesheet">
@@ -92,20 +95,82 @@
             <div class="section section-gray">
                 <div class="container-fluid">
                     <section class="container-register row">
+                        <?php
+                            if (isset($_POST['idcomponentes'])) { 
+                                $dados = $componentes->selectComponentes();
+
+                                $idcomponentes = intval($_POST['idcomponentes']);
+                                $quantidade = intval($_POST['quantidade']);
+                                $observacao = addslashes($_POST['observacao']);
+
+                                if (!empty($quantidade) && !empty($observacao)) {
+
+                                    $observacao = ucwords(strtolower($observacao));
+                                    
+                                    if(!$estoque->insertEstoque($observacao, $quantidade, $idcomponentes)){
+                            ?>
+                                                <div class="alert-erro">
+                                                    <span class="fas fa-exclamation-triangle"></span>
+                                                    <span class="msg">Componente já esta cadastrado</span>
+                                                    <span class="close-btn">
+                                                        <span class="fa-time"></span>
+                                                    </span>
+                                                </div>
+                            <?php
+                                        }else {
+                            ?>
+                                                <div class="alert-acerto">
+                                                    <span class="fas fa-exclamation-triangle"></span>
+                                                    <span class="msg">Componente cadastrado com sucesso</span>
+                                                    <span class="close-btn">
+                                                        <span class="fa-time"></span>
+                                                    </span>
+                                                </div>
+                            <?php                
+                                        }
+                                    } else {
+                            ?>
+                                        <p class="erro text-center">
+                                            <?php
+                                                echo "Preencha todos os dados";
+                                            ?>
+                                        </p>
+                            <?php
+                                    }
+                                }
+                        ?>
                         <section id="left" class="col-md-4">
                             <form action="" class="form-register">
-                            <h3>Cadastro</h3>
-                            <div class="textboxregister">
-                                <label for="name">Nome</label>
-                                <input type="text" name="name" id="name">
-                                <span class="check-message-register hidden">Obrigatório</span>
-                            </div>
-                            <div class="textboxregister">
-                                <label for="description">Descrição</label>
-                                <input type="text" name="description" id="description">
-                                <span class="check-message-register hidden">Obrigatório</span>
-                            </div>
-                            <input type="submit" value="Cadastrar" name="login" id="login" class="register-btn" disabled>
+                                <h3>Cadastro</h3>
+                                <div class="textboxregister">
+                                    <label for="name">Nome</label>
+                                    <select name="idcomponentes" id="idcomponentes">
+                                        <?php
+                                            $dados = $componentes->selectComponentes();
+                                                
+                                                foreach ($dados as  $value){           
+                                        ?>
+                                                    <option value="<?php echo $value['idcomponentes']?>">
+                                                        <?php
+                                                            echo $value['nome'];
+                                                        ?>
+                                                    </option>
+                                        <?php                    
+                                                }          
+                                        ?>
+                                    </select>
+                                </div>
+                                <div class="textboxregister">
+                                    <label for="quantidade">Quantidade</label>
+                                    <input type="text" name="quantidade" id="quantidade">
+                                    <span class="check-message-register hidden">Obrigatório</span>
+                                </div>
+                                <div class="textboxregister">
+                                    <label for="observacao">Observação</label>
+                                    <input type="text" name="observacao" id="observacao" placeholder="Aquisição de novos itens">
+                                    <span class="check-message-register hidden">Obrigatório</span>
+                                </div>
+                                <input type="submit" value="Cadastrar" name="login" id="login" class="register-btn" disabled>
                             </form>
                         </section>
                         <section id="right" class="col-md-8">
@@ -140,6 +205,12 @@
                             ?>
                             </table>
                         </section>
+                        <div class="relatorio col-md-12">
+                            <p>
+                            Clique aqui para gerar o relátorio.
+                            <a target="_brack" href="geradorPdf.php" class="fa fa-file-pdf-o" aria-hidden="true"></a>
+                            </p>
+                        </div>
                     </section>
                 </div>
             </div>

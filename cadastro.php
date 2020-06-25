@@ -1,8 +1,8 @@
 <?php
 
     require_once 'verifica.php';
-    require_once 'CrudComponentes.php';
-    $componentes = new Componentes();
+    require_once "classes/CrudComponentes.class.php";
+    $componentes = new Componente();
 
 ?>
 <!DOCTYPE html>
@@ -158,29 +158,55 @@
                                     <td id="title-register">Descrição</td>
                                     <td id="title-register">Editar</td>
                                 </tr>
-                            <?php
-                                $dados = $componentes->selectComponentes();
-                                if(count($dados) > 0){ // buscando dasdo no DB para exibilos
-                                    for ($i=0; $i < count($dados); $i++) { 
-                                        echo "<tr>";
-                                        foreach ($dados[$i] as $key => $value) {
-                                            if ($key != "idcomponentes" && $key != "usuario_idusuario") {
-                                                echo "<td>".$value."</td>";
+                                <?php
+                                    $dados = $componentes->selectComponentes();
+                                    //defini o numero de paginas
+                                    $limit = 10;
+                                    //pagina atual
+                                    $pagina = (!isset($_GET['pagina'])) ? 1 : $_GET['pagina'];
+                                    $total = ceil((count($dados) / $limit));
+                                    $inicio = ($limit * $pagina)-$limit;
+
+                                    $selectLimit = $componentes->selectComponentesLimit($inicio, $limit);
+
+                                    if(count($dados) > 0){
+                                        for ($i=0; $i < count($selectLimit); $i++) { 
+                                            echo "<tr>";
+                                            foreach ($selectLimit[$i] as $key => $value) {
+                                                if ($key != "idcomponentes" && $key != "usuario_idusuario") {
+                                                    echo "<td>".$value."</td>";
+                                                }
+                                            }
+                                ?>           
+                                            <td>
+                                                <a href="" id="to-edit">Editar</a>
+                                            </td> 
+                                <?php     
+                                            echo "</tr>";  
+                                        }
+                                ?>
+                            </table>
+                            <div class="pagina">
+                                <?php
+                                        for ($i=1; $i <= $total; $i++){
+                                            if ($i ==  $pagina) {
+                                                echo ' '.$i.' ';
+                                            }else{
+                                                echo ' <a href="? pagina='.$i.'"> '.$i.' </a> ';
                                             }
                                         }
-                            ?>
-                                        <td>
-                                            <a href="" id="to-edit">Editar</a>
-                                        </td>
-                            <?php
-                                        echo "</tr>";
+                                    }else { // DB vasio
+                                        echo "<p class='text-center'>Não exixte dados cadastrados.</p>";
                                     }
-                                } else { // DB vasio
-                                    echo "<p class='text-center'>Não exixte dados cadastrados.</p>";
-                                }
-                            ?>
-                            </table>
+                                ?>
+                            </div>
                         </section>
+                        <div class="relatorio col-md-12">
+                            <p>
+                            Clique aqui para gerar o relátorio.
+                            <a target="_brack" href="geradorPdf.php" class="fa fa-file-pdf-o" aria-hidden="true"></a>
+                            </p>
+                        </div>
                     </section>
                 </div>
             </div>

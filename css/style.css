@@ -256,3 +256,16 @@ td {
 #delete:hover {
 	color: #ff0000;
 }
+.pagina {
+	text-align: center;
+	padding-top: 10px;
+	color: #f7765f;
+	font-weight: 700;
+}
+.relatorio {
+	text-align: center;
+}
+.relatorio a {
+	color: red;
+	font-size: 24px;
+}

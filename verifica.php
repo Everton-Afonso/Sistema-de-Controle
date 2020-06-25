@@ -4,7 +4,7 @@
     $pdo = conexao();
 
     if (isset($_SESSION['id']) && !empty($_SESSION['id'])) {
-        require_once 'CrudComponentes.php';
+        require_once 'classes/CrudComponentes.class.php';
         $idUser = new Componentes();
         $list = $idUser->logado($_SESSION['id']);
 
