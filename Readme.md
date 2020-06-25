@@ -1,3 +1,5 @@
+![](images/logo.jpg)
+
 # Sistema de Controle
 
 ## Requisitos para poder gerar o relátorio:
