@@ -130,11 +130,9 @@
                                         }
                                     } else {
                             ?>
-                                        <p class="erro text-center">
-                                            <?php
-                                                echo "Preencha todos os dados";
-                                            ?>
-                                        </p>
+                                        <div class="alert-erro">
+                                            <p><?php echo "Preencha todos os dados"; ?> </p>
+                                        </div>
                             <?php
                                     }
                                 }

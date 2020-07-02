@@ -97,12 +97,6 @@
 .hidden {
 	display: none;
 }
-/*apagar*/
-.erro {
-	color: #ff0000;
-	padding-top: 12px;
-	font-weight: 700;
-}
 /* ----------- Tela cadastro -----------  */
 .container-register {
 	display: flex;
@@ -252,9 +246,11 @@ td {
 }
 #to-edit:hover {
 	color: #008000;
+	font-weight: 600;
 }
 #delete:hover {
 	color: #ff0000;
+	font-weight: 600;
 }
 .pagina {
 	text-align: center;

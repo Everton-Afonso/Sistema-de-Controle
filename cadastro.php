@@ -69,9 +69,7 @@
                             data-scroll="true">Estoque</a>
                     </li>
                     <li class="nav-item">
-                        <a class="btn btn-warning" href="logout.php">
-                            <i class="nc-icon nc-email-85"></i>Sair
-                        </a>
+                        <a class="btn btn-warning" href="logout.php">Sair</a>
                     </li>
                 </ul>
             </div>
@@ -153,11 +151,6 @@
                         </section>
                         <section id="right" class="col-md-8">
                         <table>
-                                <tr id="title-register">
-                                    <td id="title-register">Nome</td>
-                                    <td id="title-register">Descrição</td>
-                                    <td id="title-register">Editar</td>
-                                </tr>
                                 <?php
                                     $dados = $componentes->selectComponentes();
                                     //defini o numero de paginas
@@ -170,7 +163,14 @@
                                     $selectLimit = $componentes->selectComponentesLimit($inicio, $limit);
 
                                     if(count($dados) > 0){
-                                        for ($i=0; $i < count($selectLimit); $i++) { 
+                                        for ($i=0; $i < count($selectLimit); $i++) {
+                                ?>
+                                            <tr id="title-register">
+                                                <th id="title-register">Nome</th>
+                                                <th id="title-register">Descrição</th>
+                                                <th id="title-register">Editar</th>
+                                            </tr>
+                                <?php 
                                             echo "<tr>";
                                             foreach ($selectLimit[$i] as $key => $value) {
                                                 if ($key != "idcomponentes" && $key != "usuario_idusuario") {
