@@ -16,38 +16,48 @@
 CREATE DATABASE IF NOT EXISTS `mydb` /*!40100 DEFAULT CHARACTER SET utf8 */ /*!80016 DEFAULT ENCRYPTION='N' */;
 USE `mydb`;
 
+-- Copiando estrutura para tabela mydb.baixas
+CREATE TABLE IF NOT EXISTS `baixas` (
+  `idbaixas` int(11) NOT NULL AUTO_INCREMENT,
+  `motivo` varchar(150) NOT NULL,
+  `data` date NOT NULL,
+  `estoque_idestoque` int(11) NOT NULL,
+  PRIMARY KEY (`idbaixas`,`estoque_idestoque`),
+  KEY `fk_baixas_estoque1_idx` (`estoque_idestoque`),
+  CONSTRAINT `fk_baixas_estoque1` FOREIGN KEY (`estoque_idestoque`) REFERENCES `estoque` (`idestoque`)
+) ENGINE=InnoDB AUTO_INCREMENT=40 DEFAULT CHARSET=utf8;
+
+-- Copiando dados para a tabela mydb.baixas: ~3 rows (aproximadamente)
+/*!40000 ALTER TABLE `baixas` DISABLE KEYS */;
+/*!40000 ALTER TABLE `baixas` ENABLE KEYS */;
+
 -- Copiando estrutura para tabela mydb.componentes
 CREATE TABLE IF NOT EXISTS `componentes` (
   `idcomponentes` int(11) NOT NULL AUTO_INCREMENT,
   `nome` varchar(45) NOT NULL,
   `descricao` varchar(250) NOT NULL,
-  `quantidade` int(11) NOT NULL,
   `usuario_idusuario` int(11) NOT NULL,
   PRIMARY KEY (`idcomponentes`,`usuario_idusuario`),
   KEY `fk_componentes_usuario1_idx` (`usuario_idusuario`),
   CONSTRAINT `fk_componentes_usuario1` FOREIGN KEY (`usuario_idusuario`) REFERENCES `usuario` (`idusuario`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=48 DEFAULT CHARSET=utf8;
 
--- Copiando dados para a tabela mydb.componentes: ~4 rows (aproximadamente)
+-- Copiando dados para a tabela mydb.componentes: ~3 rows (aproximadamente)
 /*!40000 ALTER TABLE `componentes` DISABLE KEYS */;
-INSERT INTO `componentes` (`idcomponentes`, `nome`, `descricao`, `quantidade`, `usuario_idusuario`) VALUES
-	(1, 'Arduino Uno', 'Placas Microcontroladora', 10, 1),
-	(2, 'Resistor 1K', 'Tem finalidade de transformar energia elétrica em energia térmica', 40, 1),
-	(3, 'Resistor 10K', 'Tem finalidade de transformar energia elétrica em energia térmica', 50, 1),
-	(4, 'Resistor 350 ohms', 'Tem finalidade de transformar energia elétrica em energia térmica', 20, 1);
 /*!40000 ALTER TABLE `componentes` ENABLE KEYS */;
 
 -- Copiando estrutura para tabela mydb.estoque
 CREATE TABLE IF NOT EXISTS `estoque` (
   `idestoque` int(11) NOT NULL AUTO_INCREMENT,
   `descricaoEstoque` varchar(255) NOT NULL,
+  `quantidade` int(11) NOT NULL,
   `componentes_idcomponentes` int(11) NOT NULL,
   PRIMARY KEY (`idestoque`,`componentes_idcomponentes`),
   KEY `fk_estoque_componentes1_idx` (`componentes_idcomponentes`),
   CONSTRAINT `fk_estoque_componentes1` FOREIGN KEY (`componentes_idcomponentes`) REFERENCES `componentes` (`idcomponentes`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=79 DEFAULT CHARSET=utf8;
 
--- Copiando dados para a tabela mydb.estoque: ~0 rows (aproximadamente)
+-- Copiando dados para a tabela mydb.estoque: ~3 rows (aproximadamente)
 /*!40000 ALTER TABLE `estoque` DISABLE KEYS */;
 /*!40000 ALTER TABLE `estoque` ENABLE KEYS */;
 
