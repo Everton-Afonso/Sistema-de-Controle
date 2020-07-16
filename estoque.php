@@ -120,7 +120,7 @@
                                         }else {
                             ?>
                                                 <div class="alert-acerto">
-                                                    <span class="fas fa-exclamation-triangle"></span>
+                                                    <span class="fa fa-thumbs-o-up"></span>
                                                     <span class="msg">Componente cadastrado com sucesso</span>
                                                     <span class="close-btn">
                                                         <span class="fa-time"></span>
@@ -131,7 +131,11 @@
                                     } else {
                             ?>
                                         <div class="alert-erro">
-                                            <p><?php echo "Preencha todos os dados"; ?> </p>
+                                            <span class="fas fa-exclamation-triangle"></span>
+                                            <span class="msg"><?php echo "Preencha todos os dados"; ?></span>
+                                            <span class="close-btn">
+                                                <span class="fa-time"></span>
+                                            </span>
                                         </div>
                             <?php
                                     }
@@ -142,7 +146,7 @@
                                 <h3>Cadastro</h3>
                                 <div class="textboxregister">
                                     <label for="name">Nome</label>
-                                    <select name="idcomponentes" id="idcomponentes">
+                                    <select name="idcomponentes" id="idcomponentes" title="Selecione o nome do componente">
                                         <?php
                                             $dados = $componentes->selectComponentes();
                                                 
@@ -160,12 +164,12 @@
                                 </div>
                                 <div class="textboxregister">
                                     <label for="quantidade">Quantidade</label>
-                                    <input type="text" name="quantidade" id="quantidade">
+                                    <input ttype="number" name="quantidade" id="quantidade" title="Informe a quantidade de componentes">
                                     <span class="check-message-register hidden">Obrigatório</span>
                                 </div>
                                 <div class="textboxregister">
-                                    <label for="observacao">Observação</label>
-                                    <input type="text" name="observacao" id="observacao" placeholder="Aquisição de novos itens">
+                                <label for="observacao">Localização</label>
+                                    <input type="text" name="observacao" id="observacao" title="Informe onde o componente está localizado">
                                     <span class="check-message-register hidden">Obrigatório</span>
                                 </div>
                                 <input type="submit" value="Cadastrar" name="login" id="login" class="register-btn" disabled>
@@ -198,7 +202,7 @@
                                         echo "</tr>";
                                     }
                                 } else { // DB vasio
-                                    echo "<p class='text-center'>Não exixte dados cadastrados.</p>";
+                                    echo "<p class='text-center'>Ops !!! não exixte dados cadastrados.</p>";
                                 }
                             ?>
                             </table>
