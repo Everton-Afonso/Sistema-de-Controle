@@ -4,9 +4,9 @@
 
     if((isset($_POST['user']) && !empty($_POST['user'])) && (isset($_POST['password']) && !empty($_POST['password']))){ //verificando se os campos não estão nulos
       
-        require_once 'CrudComponentes.php'; //requerindo uma conexão com DB
+        require_once "classes/CrudComponentes.class.php"; //requerindo uma conexão com DB
 
-        $class = new Componentes(); //Instanciando um novo objeto da class Componentes
+        $class = new Componente(); //Instanciando um novo objeto da class Componentes
 
         $user = addslashes($_POST['user']); 
         $pass = addslashes($_POST['password']);

@@ -5,7 +5,7 @@
 
     if (isset($_SESSION['id']) && !empty($_SESSION['id'])) {
         require_once 'classes/CrudComponentes.class.php';
-        $idUser = new Componentes();
+        $idUser = new Componente();
         $list = $idUser->logado($_SESSION['id']);
 
     } else {

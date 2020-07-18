@@ -48,11 +48,22 @@
             return $result;
         }
         
-      // logout do sistema destrói a seção do usuário
+        // logout do sistema destrói a seção do usuário
         public function exit(){
-            session_start();
             session_destroy();
             header('location: index.php');
+        }
+
+        //select usuario
+        public function selectUser($idUser){
+
+            $pdo = conexao();
+            $result = array();
+            $select = $pdo->prepare("SELECT user FROM usuario WHERE idusuario = :idUser");
+            $select->bindValue('idUser', $idUser);
+            $select->execute();
+            $result = $select->fetch(PDO::FETCH_ASSOC);
+            return $result['user'];
         }
 
         //seleciona todos os dados da tabela componentes 
@@ -65,7 +76,16 @@
             return $result;
 
         }
+        //pesquisa o nome desejado 
+        public function pesquisar($name){
 
+            $pdo = conexao();
+            $result = array();
+            $select = $pdo->query("SELECT * FROM componentes WHERE nome LIKE '".$name."%'");
+            $result = $select->fetchAll(PDO::FETCH_ASSOC);
+            return $result;
+
+        }
         //seleciona uma certa quantidade de dados para exibir na paginação da tabela
         public function selectComponentesLimit($inicio, $limit){
 
@@ -76,7 +96,31 @@
             return $result;
 
         }
+        //select por ID
+        public function selectId($id){
 
+            $pdo = conexao();
+            $result = array();
+            $select = $pdo->prepare("SELECT * FROM componentes WHERE idcomponentes = :id");
+            $select->bindValue('id', $id);
+            $select->execute();
+            $result = $select->fetch(PDO::FETCH_ASSOC);
+            return $result;
+
+        }
+        // update
+        public function atualiza($name, $description, $id_update){
+
+            $pdo = conexao();
+            $update = $pdo->prepare("UPDATE componentes SET nome = :nome, descricao = :descricao WHERE idcomponentes = :id");
+            $update->bindValue('nome', $name);
+            $update->bindValue('descricao', $description);
+            $update->bindValue('id', $id_update);
+            $update->execute();
+
+            return true;
+
+        }
         //insere os dados na tabela componentes
         public function insertComponentes($name, $description, $idUser){
 

@@ -80,6 +80,10 @@
                             <a class="nav-link" href="estoque.php"
                                 data-scroll="true">Estoque</a>
                         </li>
+                        <form method="POST" class="form-inline my-2 my-lg-0" autocomplete="off">
+                            <input class="form-control mr-sm-2" type="search" name="pesquisar">
+                            <button class="btn btn-primary my-2 my-sm-0" type="submit">Pesquisar</button>
+                        </form>
                         <li class="nav-item">
                             <a class="btn btn-warning" href="logout.php">Sair</a>
                         </li>
@@ -100,6 +104,65 @@
             </div>
         </div>
         <div class="wrapper">
+             <div class="container">
+                <div class="row">
+                    <section id="right" class="pesqusar col-md-12">
+                        <?php
+                            if (isset($_POST['pesquisar'])){
+                                $name = addslashes($_POST['pesquisar']);
+                                if (!empty($name)) {
+                                    $name = ucwords(strtolower($name));
+                                    $pesquisar = $componentes->pesquisar($name);
+                                    if(count($pesquisar) > 0){
+                                    ?>
+                                        <h4 class="title-uppercase text-center mt-4 mb-4">Itens encontrados</h4>
+                                        <table>
+                                            <tr id="title-register">
+                                                <th id="title-register">Nome</th>
+                                                <th id="title-register">Descrição</th>
+                                                <th id="title-register">Editar</th>
+                                            </tr>
+                                    <?php  
+                                        for ($i=0; $i < count($pesquisar); $i++) { 
+                                            echo "<tr>";         
+                                            foreach ($pesquisar[$i] as $key => $value) {
+                                                if ($key != "idcomponentes" && $key != "usuario_idusuario") {
+                                                    echo "<td>".$value."</td>";
+                                                }
+                                            }
+                                        ?>           
+                                            <td>
+                                                <a href="cadastro.php?id_up=<?php echo $pesquisar[$i]["idcomponentes"];?>" id="to-edit">Editar</a>
+                                            </td> 
+                                        <?php 
+                                            echo "</tr>";   
+                                        }
+                                        ?>
+                                    </table>
+                                    <div class="text-center mt-3">
+                                        <a href="cadastro.php" class="btn btn-danger">Fechar</a>
+                                    </div>
+                                    <?php  
+                                    }
+                                        else {
+                                        ?>
+                                            <div class="title-uppercase text-center mt-4 mb-4">
+                                                <p>O nome informado não consta em nossos registros.</p>
+                                            </div>
+                                        <?php
+                                    }   
+                                } else {
+                                ?>
+                                    <div class="title-uppercase text-center mt-4 mb-4">
+                                        <p>O campo de pesquisa esta vazio.</p>
+                                    </div>
+                                <?php
+                                }
+                            }
+                        ?>
+                    </section>
+                </div>
+            </div>
             <div class="main">
                 <div class="section section-gray">
                     <div class="container-fluid">
@@ -124,7 +187,7 @@
                                                 header("Location: cadastro.php");
 
                                             }else {
-                            ?>
+                                                ?>
                                                     <div class="alert-erro">
                                                         <span class="fa fa-thumbs-o-up"></span>
                                                         <span class="msg">Erro ao tentar atualizar o componente</span>
@@ -132,7 +195,7 @@
                                                             <span class="fa-time"></span>
                                                         </span>
                                                     </div>
-                            <?php                
+                                                <?php                
                                             }
                                         } 
 
@@ -148,17 +211,17 @@
                                             $description = ucwords(strtolower($description));
 
                                             if(!$componentes->insertComponentes($name, $description, $idUser)){
-                            ?>
-                                                <div class="alert-erro">
-                                                    <span class="fas fa-exclamation-triangle"></span>
-                                                    <span class="msg">Componente já esta cadastrado</span>
-                                                    <span class="close-btn">
-                                                        <span class="fa-time"></span>
-                                                    </span>
-                                                </div>
-                            <?php
+                                                ?>
+                                                    <div class="alert-erro">
+                                                        <span class="fas fa-exclamation-triangle"></span>
+                                                        <span class="msg">Componente já esta cadastrado</span>
+                                                        <span class="close-btn">
+                                                            <span class="fa-time"></span>
+                                                        </span>
+                                                    </div>
+                                                <?php
                                             }else {
-                            ?>
+                                                ?>
                                                     <div class="alert-acerto">
                                                         <span class="fa fa-thumbs-o-up"></span>
                                                         <span class="msg">Componente cadastrado com sucesso</span>
@@ -166,18 +229,18 @@
                                                             <span class="fa-time"></span>
                                                         </span>
                                                     </div>
-                            <?php                
+                                                <?php                
                                             }
                                         } else {
-                            ?>
-                                            <div class="alert-erro">
-                                                    <span class="fas fa-exclamation-triangle"></span>
-                                                    <span class="msg"><?php echo "Preencha todos os dados"; ?></span>
-                                                    <span class="close-btn">
-                                                        <span class="fa-time"></span>
-                                                    </span>
-                                            </div>
-                            <?php
+                                            ?>
+                                                <div class="alert-erro">
+                                                        <span class="fas fa-exclamation-triangle"></span>
+                                                        <span class="msg"><?php echo "Preencha todos os dados"; ?></span>
+                                                        <span class="close-btn">
+                                                            <span class="fa-time"></span>
+                                                        </span>
+                                                </div>
+                                            <?php
                                         }
                                     } 
                                 }
@@ -190,7 +253,7 @@
                                 }
                             ?>
                             <section id="left" class="col-md-4">
-                                <form method="POST" class="form-register">
+                                <form method="POST" class="form-register" autocomplete="off">
                                     <h3>Cadastro de Componentes</h3>
                                     <div class="textboxregister">
                                         <label for="name">Nome</label>
@@ -237,13 +300,13 @@
                                         $selectLimit = $componentes->selectComponentesLimit($inicio, $limit);
 
                                         if(count($dados) > 0){
-                                    ?>
-                                            <tr id="title-register">
-                                                <th id="title-register">Nome</th>
-                                                <th id="title-register">Descrição</th>
-                                                <th id="title-register">Editar</th>
-                                            </tr>
-                                    <?php 
+                                            ?>
+                                                <tr id="title-register">
+                                                    <th id="title-register">Nome</th>
+                                                    <th id="title-register">Descrição</th>
+                                                    <th id="title-register">Editar</th>
+                                                </tr>
+                                            <?php 
                                             for ($i=0; $i < count($selectLimit); $i++) {            
                                                 echo "<tr>";
                                                 foreach ($selectLimit[$i] as $key => $value) {
@@ -251,12 +314,12 @@
                                                         echo "<td>".$value."</td>";
                                                     }
                                                 }
-                                    ?>           
-                                                <td>
-                                                    <a href="cadastro.php?id_up=<?php echo $dados[$i]["idcomponentes"];?>" id="to-edit">Editar</a>
-                                                </td> 
-                                    <?php     
-                                                echo "</tr>";  
+                                                ?>           
+                                                    <td>
+                                                        <a href="cadastro.php?id_up=<?php echo $dados[$i]["idcomponentes"];?>" id="to-edit">Editar</a>
+                                                    </td> 
+                                                <?php     
+                                                    echo "</tr>";  
                                             }
                                     ?>
                                 </table>
@@ -275,12 +338,6 @@
                                     ?>
                                 </div>
                             </section>
-                            <div class="relatorio col-md-12">
-                                <p>
-                                Clique aqui para gerar o relátorio.
-                                <a target="_brack" href="geradorPdf.php" class="fa fa-file-pdf-o" aria-hidden="true"></a>
-                                </p>
-                            </div>
                         </section>
                     </div>
                 </div>

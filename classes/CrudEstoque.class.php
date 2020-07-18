@@ -9,15 +9,72 @@
 
             $pdo = conexao();
             $result = array();
-            $select = $pdo->query("SELECT idestoque, nome, quantidade, descricaoEstoque 
-            FROM componentes INNER JOIN estoque ON componentes.idcomponentes = 
-            estoque.componentes_idcomponentes ORDER BY componentes.nome;");
+            $select = $pdo->query("SELECT idestoque, nome, descricao, quantidade, descricaoEstoque 
+            FROM componentes INNER JOIN estoque ON idcomponentes = 
+            componentes_idcomponentes ORDER BY nome");
 
             $result = $select->fetchAll(PDO::FETCH_ASSOC);
             return $result;
 
         }
+        //pesquisa o nome desejado
+        public function pesquisar($name){
 
+            $pdo = conexao();
+            $result = array();
+            $select = $pdo->query("SELECT idestoque, nome, descricao, quantidade, descricaoEstoque FROM componentes 
+            INNER JOIN estoque ON idcomponentes = componentes_idcomponentes WHERE nome LIKE '".$name."%'");
+            $result = $select->fetchAll(PDO::FETCH_ASSOC);
+            return $result;
+
+        }
+        //select limit
+        public function selectEstuqueLimit($inicio, $limit){
+
+            $pdo = conexao();
+            $result = array();
+            $select = $pdo->query("SELECT idestoque, nome, descricao, quantidade, descricaoEstoque 
+            FROM componentes INNER JOIN estoque ON idcomponentes = componentes_idcomponentes 
+            ORDER BY nome LIMIT $inicio, $limit");
+            $result = $select->fetchAll(PDO::FETCH_ASSOC);
+            return $result;
+  
+        }
+        //select por id
+        public function selectId($id){
+
+            $pdo = conexao();
+            $result = array();
+            $select = $pdo->prepare("SELECT * FROM estoque INNER JOIN componentes ON 
+            idcomponentes = componentes_idcomponentes AND idestoque = :id");
+            $select->bindValue('id', $id);
+            $select->execute();
+            $result = $select->fetch(PDO::FETCH_ASSOC);
+  
+            return $result;
+  
+        }
+         // update
+        public function atualiza($observacao, $quantidade, $id_update){
+
+            $pdo = conexao();
+
+            $select = $pdo->query("SELECT quantidade FROM estoque WHERE idestoque = $id_update");
+
+            foreach ($select as $key => $value) {
+                $result = intval($value['quantidade']) + $quantidade;
+            }
+
+            $update = $pdo->prepare("UPDATE estoque SET descricaoEstoque = :observacao, quantidade = :quantidade 
+            WHERE idestoque = :id");
+            $update->bindValue('observacao', $observacao);
+            $update->bindValue('quantidade', $result);
+            $update->bindValue('id', $id_update);
+            $update->execute();
+
+            return true;
+
+        }
         //insere dados na tabela estoque
         public function insertEstoque($observacao, $quantidade, $idcomponentes){
 
@@ -42,9 +99,8 @@
                 return true;
             }
         }
-
         //deleta um tederminado dados da tabela estoque
-          public function deleteEstoque($idEstoque){
+        public function deleteEstoque($idEstoque){
 
             $pdo = conexao();
             $delete = $pdo->prepare("DELETE FROM estoque WHERE idestoque = :idEstoq");

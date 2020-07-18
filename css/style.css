@@ -106,7 +106,7 @@
 .container-register {
 	display: flex;
 }
-/* foi add essa parte para que o formulario e a tabala fucasem na mesma altura */
+/* foi add essa parte para que o formulario e a tabala ficasem na mesma altura */
 .container-register #left {
 	margin-top: -1.85rem;
 }
@@ -286,3 +286,4 @@ td {
 .modal-footer {
 	margin-bottom: 10px;
 }
+/*testando a função busca*/

@@ -8,7 +8,8 @@
     $dompdf = new DOMPDF();
 
     ob_start();
-    require_once 'telaExemploPdf.php';
+    require_once 'Pdf.php'; 
+    
     $dompdf->loadHtml(ob_get_clean());
     
     $dompdf->setPaper("A4");
