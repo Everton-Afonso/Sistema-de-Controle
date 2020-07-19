@@ -437,7 +437,7 @@
                         <div class="relatorio col-md-12">
                             <p>
                             Clique aqui para gerar o relátorio.
-                            <a target="_brack" href="geradorPdf.php?idBaixasPdf=<?php echo $_SESSION["idbaixas"];?>" class="fa fa-file-pdf-o" aria-hidden="true"></a>
+                            <a target="_brack" href="geradorPdf.php?idBaixasPdf=<?php echo "1";?>" class="fa fa-file-pdf-o" aria-hidden="true"></a>
                             </p>
                         </div>
                     </section>
