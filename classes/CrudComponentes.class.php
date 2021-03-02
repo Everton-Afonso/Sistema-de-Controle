@@ -1,10 +1,13 @@
 <?php
 
     require_once "conexao/conexao.php"; 
+    if(session_status() !== PHP_SESSION_ACTIVE) { 
+        session_start(); 
+    } 
 
     Class Componente{
 
-      //verifica se o usuário efetuou o login com sucesso 
+            //verifica se o usuário efetuou o login com sucesso 
         public function login($user, $pass){
             $pdo = conexao();
 
@@ -21,14 +24,15 @@
         
                     if($dados->rowCount() > 0){
                         $id = $dados->fetch();
-            
                         $_SESSION['id'] = $id['idusuario'];
                         return true;
                     }else{
-                        return flase;
+                        return false;
+                        exit();
                     }        
                 }else{
-                    echo "Erro";
+                    $_SESSION['loginErro'] = "Usuário ou senha inválido";
+                    header("Location: index.php"); // retornando o usuario para a tela de login caso os campos estejam nulos;
                 }
             }
         }
@@ -48,14 +52,25 @@
             return $result;
         }
         
-      // logout do sistema destrói a seção do usuário
+        // logout do sistema destrói a seção do usuário
         public function exit(){
-            session_start();
             session_destroy();
             header('location: index.php');
         }
 
-        //seleciona todos os dados da tabela componentes 
+        //select usuario
+        public function selectUser($idUser){
+
+            $pdo = conexao();
+            $result = array();
+            $select = $pdo->prepare("SELECT user FROM usuario WHERE idusuario = :idUser");
+            $select->bindValue('idUser', $idUser);
+            $select->execute();
+            $result = $select->fetch(PDO::FETCH_ASSOC);
+            return $result['user'];
+        }
+
+        //select componentes
         public function selectComponentes(){
 
             $pdo = conexao();
@@ -65,8 +80,7 @@
             return $result;
 
         }
-
-        //seleciona uma certa quantidade de dados para exibir na paginação da tabela
+        //select limit
         public function selectComponentesLimit($inicio, $limit){
 
             $pdo = conexao();
@@ -76,8 +90,32 @@
             return $result;
 
         }
+        //select por ID
+        public function selectId($id){
 
-        //insere os dados na tabela componentes
+            $pdo = conexao();
+            $result = array();
+            $select = $pdo->prepare("SELECT * FROM componentes WHERE idcomponentes = :id");
+            $select->bindValue('id', $id);
+            $select->execute();
+            $result = $select->fetch(PDO::FETCH_ASSOC);
+            return $result;
+
+        }
+        // update
+        public function atualiza($name, $description, $id_update){
+
+            $pdo = conexao();
+            $update = $pdo->prepare("UPDATE componentes SET nome = :nome, descricao = :descricao WHERE idcomponentes = :id");
+            $update->bindValue('nome', $name);
+            $update->bindValue('descricao', $description);
+            $update->bindValue('id', $id_update);
+            $update->execute();
+
+            return true;
+
+        }
+        //insert
         public function insertComponentes($name, $description, $idUser){
 
             $pdo = conexao();

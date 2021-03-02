@@ -1,3 +1,156 @@
+/* Estilização da tela de login */
+* {
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+}
+/* Diminuir a fonte conforme o tamanho da tela */
+@media(max-width: 1080px){
+    html {
+        font-size: 93.75%;
+    }
+}
+@media(max-width: 720px){
+    html {
+        font-size: 87.5%;
+    }
+} 
+strong, p {
+	color: #DCDDE0;
+}
+.overlay {
+	flex: 1;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+
+	width: 100vw;
+    height: 100vh;
+
+	position: absolute;
+
+	background: linear-gradient(0deg, rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.4)), 
+	url(../img/logo.jpg);
+	  
+	background-position: center;
+	background-repeat: no-repeat;
+
+	font-family: "Inter", sans-serif;
+}
+.container {
+	display: flex;
+	width: 800px;
+	height: 400px;
+
+	background: rgba(0, 0, 0, 0.8);
+}
+.form {
+	display: grid;
+	grid-template-columns: 1fr 1fr;
+}
+.left {
+	text-align: center;
+	display: grid;
+	background: rgba(0, 245, 247, 0.8);
+}
+.left > img {
+	width: 20rem;
+	height: 6rem;
+	margin-top: 4.375rem;
+}
+.left > strong {
+	font-size: 1.5rem;
+	font-weight: 600;
+
+}
+.copyright {
+	text-align: center;
+	margin-top: 9.375rem;
+}
+.copyright > div > strong {
+	font-size: 0.8rem;
+}
+.right {
+	display: grid;
+    grid-template-columns: 1fr;
+}
+.right p {
+	text-align: center;
+}
+.right > img {
+	height: 6.25rem;
+	margin-top: 2.5rem;
+	margin-left: 3.123rem;
+}
+.right  > strong {
+	font-size: 1.5rem;
+	font-weight: 600;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+.right > form {
+	padding-bottom: 15px;
+}
+.textbox {
+	margin-top: 0.5rem;
+}
+.textbox input {
+	width: 24.5rem;
+	height: 2.5rem;
+	border: none;
+	background: #2b2b2bb3;
+	padding: 0 0.9375rem;
+	font-size: 1rem;
+	outline: none;
+	color: #f4f4ff;
+}
+.textbox input:focus + .check-message,
+.textboxregister input:focus + .check-message-register {
+	display: none;
+}
+.login-btn {
+	width: 30%;
+	height: 40px;
+	margin-top: 16px;
+	background: rgba(25, 25, 25, 0.7);
+	border: none;
+	outline: none;
+	cursor: pointer;
+	text-transform: uppercase;
+	font-weight: 700;
+	transition: 0.3s linear;
+}
+.login-btn.active,
+.register-btn.active {
+	background: rgba(0, 245, 247, 0.8);
+	color: #fff;
+}
+.login-btn.active:hover,
+.register-btn.active:hover {
+	opacity: 0.7;
+}
+.hidden {
+	display: none;
+}
+.check-message {
+	position: absolute;
+	padding-bottom: 25px;
+	right: 1.5rem;
+	color: #ffff00;
+	transform: translateY(-50%);
+}
+.erro {
+	color: #ffff00;
+}
+/* Fim da estilização da tela de login */
+
+.fixed-top {
+	position: absolute;
+}
+.page-header {
+    min-height: 60vh !important;
+}
 .card-image .card {
 	min-height: 0;
 }
@@ -6,40 +159,8 @@
 	text-transform: uppercase;
 	font-weight: 500;
 }
-.erro {
-	color: #fab526;
-	font-size: 20px;
-	font-weight: 600;
-}
-.textbox {
-	width: 100%;
-	height: 50px;
-	position: relative;
-	margin-top: 15px;
-}
-.textbox input {
-	width: 100%;
-	height: 50px;
-	border: none;
-	background: rgba(43, 43, 43, 0.7);
-	padding: 0 15px;
-	font-size: 16px;
-	outline: none;
-	color: #f4f4ff;
-}
 .textbox input:focus {
 	background: rgba(72, 72, 68, 0.6) !important;
-}
-.check-message {
-	position: absolute;
-	top: 70%;
-	right: 10px;
-	color: #fff;
-	transform: translateY(-50%);
-}
-.textbox input:focus + .check-message,
-.textboxregister input:focus + .check-message-register {
-	display: none;
 }
 .options {
 	margin-top: 15px;
@@ -78,35 +199,11 @@
 .options a {
 	color: #f4f4f480;
 }
-.login-btn {
-	width: 30%;
-	height: 40px;
-	margin-top: 30px;
-	background: rgba(25, 25, 25, 0.7);
-	border: none;
-	outline: none;
-	cursor: pointer;
-	text-transform: uppercase;
-	font-weight: 700;
-	transition: 0.3s linear;
-}
-.login-btn.active,
-.register-btn.active {
-	background: #037bee;
-	color: #fff;
-}
-.login-btn.active:hover,
-.register-btn.active:hover {
-	opacity: 0.7;
-}
-.hidden {
-	display: none;
-}
 /* ----------- Tela cadastro -----------  */
 .container-register {
 	display: flex;
 }
-/* foi add essa parte para que o formulario e a tabala fucasem na mesma altura */
+/* foi add essa parte para que o formulario e a tabala ficasem na mesma altura */
 .container-register #left {
 	margin-top: -1.85rem;
 }
@@ -285,4 +382,84 @@ td {
 }
 .modal-footer {
 	margin-bottom: 10px;
+}
+/* media para responsividade da pagina */
+@media(max-width: 800px){
+	.container {
+		width: 700px;
+		height: 400px;
+	}
+	.right > img {
+		margin-left: 1.6rem;
+	}
+	.textbox  > input{
+		margin-top: 0.5rem;
+		padding: 0 auto;
+		width: 21rem;
+	}
+}
+@media(max-width: 700px){
+	.form {
+		display: flex;
+		justify-content: center;
+		align-items: center;
+	}
+	.left {
+		opacity: 0; /* Esconde no desktop. */
+    	height: 0;
+	}
+	.left > img {
+		opacity: 0; /* Esconde no desktop. */
+    	height: 0;
+	}
+	.copyright {
+		opacity: 0; /* Esconde no desktop. */
+    	height: 0;
+	}
+	.copyright > div > strong{
+		opacity: 0; /* Esconde no desktop. */
+    	height: 0;
+	}
+}
+@media(max-width: 600px){
+	.right > img {
+		margin-left: 4.3rem;
+	}
+}
+@media(max-width: 500px){
+	.container {
+		width: 600px;
+		height: 350px;
+	}
+	.check-message {
+		right: 2.5rem;
+	}
+	.textbox > input{
+		margin-top: 0.5rem;
+		padding: 0 auto;
+		width: 27.5rem;
+	}
+}
+@media(max-width: 400px){
+	.right > img {
+		margin-left: 2.5rem;
+	}
+	.check-message {
+		right: 1.7rem;
+	}
+	.textbox > input{
+		margin-top: 0.5rem;
+		padding: 0 auto;
+		width: 24.5rem;
+	}
+}
+@media(max-width: 350px){
+	.right > img {
+		margin-left: 1.2rem;
+	}
+	.textbox > input{
+		margin-top: 0.5rem;
+		padding: 0 auto;
+		width: 21rem;
+	}
 }

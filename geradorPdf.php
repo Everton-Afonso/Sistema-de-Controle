@@ -3,7 +3,7 @@
     use Dompdf\Dompdf;
 
     // include autoloader
-    require_once './dompdf/autoload.inc.php';
+    require_once './dompdf-master/autoload.inc.php';
 
     $dompdf = new DOMPDF();
 

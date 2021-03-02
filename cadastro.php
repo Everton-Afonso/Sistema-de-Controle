@@ -3,10 +3,11 @@
     require_once 'verifica.php';
     require_once "classes/CrudComponentes.class.php";
     $componentes = new Componente();
-    ob_start();
+    
     if(session_status() !== PHP_SESSION_ACTIVE) { 
         session_start(); 
     } 
+    ob_start();
 
 ?>
 <!DOCTYPE html>
@@ -50,7 +51,7 @@
 
     <body class="off-canvas-menu">
         <!--    menu navbar     -->
-        <nav class="navbar navbar-expand-lg fixed-top bg-danger navbar-transparent" color-on-scroll="40">
+        <nav class="navbar navbar-expand-lg fixed-top navbar-transparent">
             <div class="container">
                 <div class="navbar-translate">
                     <div class="row navbar-header">
@@ -74,7 +75,7 @@
                     <ul class="navbar-nav ml-auto">
                         <li class="nav-item">
                             <a class="nav-link" href="baixas.php"
-                                data-scroll="true">Baixas</a>
+                                data-scroll="true">Movimentação</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" href="estoque.php"
@@ -93,7 +94,7 @@
             <div class="filter"></div>
             <div class="content-end">
                 <div class="motto">
-                    <h1 class="title-uppercase text-center"><b>Tela de Cadastro</b></h1>
+                    <h1 class="title-uppercase text-center"><b>Cadastro</b></h1>
                     <h3 class="text-center"></h3>
                     <br>
                 </div>
@@ -191,7 +192,7 @@
                             ?>
                             <section id="left" class="col-md-4">
                                 <form method="POST" class="form-register">
-                                    <h3>Cadastro de Componentes</h3>
+                                    <h3>Componentes</h3>
                                     <div class="textboxregister">
                                         <label for="name">Nome</label>
                                         <input type="text" name="name" id="name" title="Informe o nome do componente" 
@@ -241,7 +242,7 @@
                                             <tr id="title-register">
                                                 <th id="title-register">Nome</th>
                                                 <th id="title-register">Descrição</th>
-                                                <th id="title-register">Editar</th>
+                                                <th id="title-register">Função</th>
                                             </tr>
                                     <?php 
                                             for ($i=0; $i < count($selectLimit); $i++) {            

@@ -91,7 +91,7 @@
             <div class="filter"></div>
             <div class="content-end">
                 <div class="motto">
-                    <h1 class="title-uppercase text-center"><b>Tela de Estoque</b></h1>
+                    <h1 class="title-uppercase text-center"><b>Estoque</b></h1>
                     <h3 class="text-center"></h3>
                     <br>
                 </div>

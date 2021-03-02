@@ -103,14 +103,30 @@
         public function atualiza($observacao, $data, $quantidade, $id_update){
 
             $pdo = conexao();
-            $update = $pdo->prepare("UPDATE baixas INNER JOIN estoque ON idestoque = estoque_idestoque 
-            AND idbaixas = :id SET motivo = :observacao, data = :data, quantidade = :quantidade");
-            $update->bindValue('id', $id_update);
-            $update->bindValue('observacao', $observacao);
-            $update->bindValue('data', $data);
-            $update->bindValue('quantidade', $quantidade);
-            $update->execute();
-
+            
+            $select = $pdo->prepare("SELECT idestoque FROM estoque INNER JOIN baixas ON estoque.idestoque = baixas.estoque_idestoque WHERE idbaixas = :idbaixas");
+            $select->bindValue('idbaixas', $id_update);
+            $select->execute();
+            $idselect = $select->fetchAll(PDO::FETCH_ASSOC);
+            
+            foreach ($idselect as $key => $value) {
+                $id = intval($value['idestoque']);
+                $total = $this-> selectQuantidade($id);
+                foreach ($total as $key => $value) {
+                    $result = intval($value['quantidade']) - $quantidade;
+                    if($result >= 0){
+                        $update = $pdo->prepare("UPDATE baixas INNER JOIN estoque ON idestoque = estoque_idestoque 
+                        AND idbaixas = :id SET motivo = :observacao, data = :data, quantidade = :quantidade");
+                        $update->bindValue('id', $id_update);
+                        $update->bindValue('observacao', $observacao);
+                        $update->bindValue('data', $data);
+                        $update->bindValue('quantidade', $result);
+                        $update->execute();
+                    }else{
+                        return false;
+                    }
+                }
+            }
             return true;
 
         }

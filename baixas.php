@@ -3,7 +3,7 @@
     require_once 'verifica.php';
     require_once './classes/CrudEstoque.class.php';
     require_once './classes/CrudComponentes.class.php';
-    require_once './Classes/CrudBaixas.class.php';
+    require_once './classes/CrudBaixas.class.php';
     ob_start();
     $estoque = new Estoque();
     $componentes = new Componente();
@@ -65,7 +65,7 @@
 
 <body class="off-canvas-menu">
     <!--    menu navbar     -->
-    <nav class="navbar navbar-expand-lg fixed-top bg-danger navbar-transparent" color-on-scroll="40">
+    <nav class="navbar navbar-expand-lg fixed-top navbar-transparent">
         <div class="container">
             <div class="navbar-translate">
                 <div class="row navbar-header">
@@ -108,7 +108,7 @@
         <div class="filter"></div>
         <div class="content-end">
             <div class="motto">
-                <h1 class="title-uppercase text-center"><b>Tela de Baixas</b></h1>
+                <h1 class="title-uppercase text-center"><b>Movimentação</b></h1>
                 <h3 class="text-center"></h3>
                 <br>
             </div>
@@ -120,7 +120,6 @@
                 <div class="container-fluid">
                     <section class="container-register row">
                         <?php
-
                             if (isset($_POST['idestoque']) || isset($_POST['quantidade']) || isset($_POST['observacao'])) {//clicou no botão cadastrar ou atualizar.
                                 //verifica se é o botão atualizar que foi clicado.
                                 if (isset($_GET['id_up']) && !empty($_GET['id_up'])){
@@ -138,7 +137,7 @@
                                         
                                         if($baixas->atualiza($observacao, $data, $quantidade, $id_update)){
                                         
-                                            header("Location: estoque.php");
+                                            header("Location: baixas.php");
 
                                         }else {
                         ?>
@@ -169,7 +168,7 @@
                         ?>
                                             <div class="alert-erro">
                                                 <span class="fas fa-exclamation-triangle"></span>
-                                                <span class="msg">Componente já esta cadastrado</span>
+                                                <span class="msg">Não foi posivel cadastrar a baixa</span>
                                                 <span class="close-btn">
                                                     <span class="fa-time"></span>
                                                 </span>
@@ -179,7 +178,7 @@
                         ?>
                                                 <div class="alert-acerto">
                                                     <span class="fa fa-thumbs-o-up"></span>
-                                                    <span class="msg">Componente cadastrado com sucesso</span>
+                                                    <span class="msg">Baixa realizada com sucesso</span>
                                                     <span class="close-btn">
                                                         <span class="fa-time"></span>
                                                     </span>
@@ -209,7 +208,7 @@
                         ?>
                         <section id="left" class="col-md-4">
                             <form method="POST" class="form-register">
-                                <h3>Baixas</h3>
+                                <h3>Movimentação</h3>
                                 <div class="textboxregister">
                                     <label for="name">Nome</label>
                                     <?php
@@ -244,23 +243,13 @@
                                     ?>
                                 </div>
                                 <div class="textboxregister">
-                                    <label for="quantidade">Quantidade</label>
-                                    <input type="number" name="quantidade" id="quantidade" title="Informe a quantidade de componentes a ser decrementada"
-                                    value="<?php //verifica se a variavel $result possui dados, caso a mesma possua printara o resultado
-                                                if (isset($result)) {
-                                                    echo $result['quantidade'];
-                                                }
-                                            ?>">
+                                    <label for="quantidade">Quantidade Removida</label>
+                                    <input type="number" name="quantidade" id="quantidade" title="Informe a quantidade de componentes a ser removida">
                                     <span class="check-message-register hidden">Obrigatório</span>
                                 </div>
                                 <div class="textboxregister">
                                     <label for="observacao">Observação</label>
-                                    <input type="text" name="observacao" id="observacao" title="Informe o motivo da baixa"
-                                    value="<?php //verifica se a variavel $result possui dados, caso a mesma possua printara o resultado
-                                                if (isset($result)) {
-                                                    echo $result['descricaoEstoque'];
-                                                }
-                                            ?>">
+                                    <input type="text" name="observacao" id="observacao" title="Informe o motivo da baixa">
                                     <span class="check-message-register hidden">Obrigatório</span>
                                 </div>
                                 <input type="submit" 
@@ -371,8 +360,8 @@
                         </section>
                         <div class="relatorio col-md-12">
                             <p>
-                            Clique aqui para gerar o relátorio.
-                            <a target="_brack" href="geradorPdf.php" class="fa fa-file-pdf-o" aria-hidden="true"></a>
+                                Clique aqui para gerar o relátorio de Baixas.
+                                <a target="_brack" href="geradorPdf.php?idBaixasPdf=<?php echo "1";?>" class="fa fa-file-pdf-o" aria-hidden="true"></a>
                             </p>
                         </div>
                     </section>
