@@ -95,6 +95,10 @@
                         <a class="nav-link" href="estoque.php"
                             data-scroll="true">Estoque</a>
                     </li>
+                    <form method="POST" class="form-inline my-2 my-lg-0" autocomplete="off">
+                        <input class="form-control mr-sm-2" type="search" name="pesquisar">
+                        <button class="btn btn-primary my-2 my-sm-0" type="submit">Pesquisar</button>
+                    </form>
                     <li class="nav-item">
                         <a class="btn btn-warning" href="logout.php">Sair</a>
                     </li>
@@ -115,6 +119,67 @@
         </div>
     </div>
     <div class="wrapper">
+        <div class="container">
+            <div class="row">
+                <section id="right" class="col-md-12">
+                    <?php
+                        if (isset($_POST['pesquisar'])){
+                            $name = addslashes($_POST['pesquisar']);
+                            if (!empty($name)) {
+                                $name = ucwords(strtolower($name));
+                                $pesquisar = $baixas->pesquisar($name);
+                                if(count($pesquisar) > 0){
+                                ?>
+                                    <h4 class="title-uppercase text-center mt-4 mb-4">Itens encontrados</h4>
+                                    <table>
+                                        <tr id="title-register">
+                                            <th id="title-register">Nome</th>
+                                            <th id="title-register">Baixas</th> 
+                                            <th id="title-register">Motivo</th> 
+                                            <th id="title-register">Data</th> 
+                                            <th id="title-register">Funções</th> 
+                                        </tr>
+                                <?php  
+                                    for ($i=0; $i < count($pesquisar); $i++) { 
+                                        $data = implode("/",array_reverse(explode("-",$pesquisar[$i]['data'])));
+                                        echo "<tr>";
+                                            echo "<td>".$pesquisar[$i]['nome']."</td>";
+                                            echo "<td>".$pesquisar[$i]['qtdBaixas']."</td>";
+                                            echo "<td>".$pesquisar[$i]['motivo']."</td>";
+                                            echo "<td>".$data."</td>";
+                                    ?>           
+                                        <td>
+                                            <a href="baixas.php?id_up=<?php echo $pesquisar[$i]["idbaixas"];?>" id="to-edit">Editar</a>
+                                            <a data-toggle="modal" data-target="#myModal" id="delete" <?php $_SESSION["idbaixas"] = $pesquisar[$i]["idbaixas"];?>>Excluir</a> <!-- pegando idestoque para poder exclui-lo -->
+                                        </td>
+                                    <?php 
+                                        echo "</tr>";   
+                                    }
+                                ?>
+                                    </table>
+                                    <div class="text-center mt-3">
+                                        <a href="baixas.php" class="btn btn-danger">Fechar</a>
+                                    </div>
+                                <?php  
+                                } else {
+                                ?>
+                                    <div class="title-uppercase text-center mt-4 mb-4">
+                                        <p>O nome informado não consta em nossos registros.</p>
+                                    </div>
+                                <?php
+                                }   
+                            } else {
+                                ?>
+                                    <div class="title-uppercase text-center mt-4 mb-4">
+                                        <p>O campo de pesquisa esta vazio.</p>
+                                    </div>
+                                <?php
+                            }
+                        }
+                    ?>
+                </section>
+            </div>
+        </div>
         <div class="main">
             <div class="section section-gray">
                 <div class="container-fluid">
@@ -207,8 +272,13 @@
                             }
                         ?>
                         <section id="left" class="col-md-4">
+<<<<<<< HEAD
                             <form method="POST" class="form-register">
                                 <h3>Movimentação</h3>
+=======
+                            <form method="POST" class="form-register" autocomplete="off">
+                                <h3>Baixas</h3>
+>>>>>>> 4e0bcbb0817270f2b5131c412c4c12a9a3d1e42c
                                 <div class="textboxregister">
                                     <label for="name">Nome</label>
                                     <?php
@@ -218,11 +288,11 @@
                                     <?php   
                                                 $dados = $estoque->selectEstoque();
                                                     
-                                                foreach ($dados as  $value){          
+                                                foreach ($dados as $key => $value){          
                                     ?>  
                                                     <option value="<?php echo $value['idestoque']?>">
                                                             <?php
-                                                                echo $value['nome']." (quantitade: ".$value['quantidade'].")";
+                                                                echo $value['nome'];
                                                             ?>
                                                     </option>
                                     <?php
@@ -243,8 +313,18 @@
                                     ?>
                                 </div>
                                 <div class="textboxregister">
+<<<<<<< HEAD
                                     <label for="quantidade">Quantidade Removida</label>
                                     <input type="number" name="quantidade" id="quantidade" title="Informe a quantidade de componentes a ser removida">
+=======
+                                    <label for="quantidade">Baixas</label>
+                                    <input type="number" name="quantidade" id="quantidade" title="Informe a quantidade de componentes a ser decrementada"
+                                    value="<?php //verifica se a variavel $result possui dados, caso a mesma possua printara o resultado
+                                                if (isset($result)) {
+                                                    echo $result['qtdBaixas'];
+                                                }
+                                            ?>">
+>>>>>>> 4e0bcbb0817270f2b5131c412c4c12a9a3d1e42c
                                     <span class="check-message-register hidden">Obrigatório</span>
                                 </div>
                                 <div class="textboxregister">
@@ -281,7 +361,7 @@
                                 ?>
                                         <tr id="title-register">
                                             <th id="title-register">Nome</th>
-                                            <th id="title-register">Quantidade</th> 
+                                            <th id="title-register">Baixas</th> 
                                             <th id="title-register">Motivo</th> 
                                             <th id="title-register">Data</th> 
                                             <th id="title-register">Funções</th>
@@ -292,7 +372,7 @@
                                             
                                             echo "<tr>";
                                                 echo "<td>".$selectLimit[$i]['nome']."</td>";
-                                                echo "<td>".$selectLimit[$i]['quantidade']."</td>";
+                                                echo "<td>".$selectLimit[$i]['qtdBaixas']."</td>";
                                                 echo "<td>".$selectLimit[$i]['motivo']."</td>";
                                                 echo "<td>".$data."</td>";
                                 ?>
@@ -360,8 +440,13 @@
                         </section>
                         <div class="relatorio col-md-12">
                             <p>
+<<<<<<< HEAD
                                 Clique aqui para gerar o relátorio de Baixas.
                                 <a target="_brack" href="geradorPdf.php?idBaixasPdf=<?php echo "1";?>" class="fa fa-file-pdf-o" aria-hidden="true"></a>
+=======
+                            Clique aqui para gerar o relátorio.
+                            <a target="_brack" href="geradorPdf.php?idBaixasPdf=<?php echo "1";?>" class="fa fa-file-pdf-o" aria-hidden="true"></a>
+>>>>>>> 4e0bcbb0817270f2b5131c412c4c12a9a3d1e42c
                             </p>
                         </div>
                     </section>

@@ -4,7 +4,11 @@
 
     if((isset($_POST['user']) && !empty($_POST['user'])) && (isset($_POST['password']) && !empty($_POST['password']))){ //verificando se os campos não estão nulos
       
+<<<<<<< HEAD
       require_once "classes/CrudComponentes.class.php"; //requerindo uma conexão com DB
+=======
+        require_once "classes/CrudComponentes.class.php"; //requerindo uma conexão com DB
+>>>>>>> 4e0bcbb0817270f2b5131c412c4c12a9a3d1e42c
 
         $class = new Componente(); //Instanciando um novo objeto da class Componentes
 

@@ -70,7 +70,11 @@
             return $result['user'];
         }
 
+<<<<<<< HEAD
         //select componentes
+=======
+        //seleciona todos os dados da tabela componentes 
+>>>>>>> 4e0bcbb0817270f2b5131c412c4c12a9a3d1e42c
         public function selectComponentes(){
 
             $pdo = conexao();
@@ -80,7 +84,21 @@
             return $result;
 
         }
+<<<<<<< HEAD
         //select limit
+=======
+        //pesquisa o nome desejado 
+        public function pesquisar($name){
+
+            $pdo = conexao();
+            $result = array();
+            $select = $pdo->query("SELECT * FROM componentes WHERE nome LIKE '".$name."%'");
+            $result = $select->fetchAll(PDO::FETCH_ASSOC);
+            return $result;
+
+        }
+        //seleciona uma certa quantidade de dados para exibir na paginação da tabela
+>>>>>>> 4e0bcbb0817270f2b5131c412c4c12a9a3d1e42c
         public function selectComponentesLimit($inicio, $limit){
 
             $pdo = conexao();
@@ -92,6 +110,7 @@
         }
         //select por ID
         public function selectId($id){
+<<<<<<< HEAD
 
             $pdo = conexao();
             $result = array();
@@ -116,6 +135,32 @@
 
         }
         //insert
+=======
+
+            $pdo = conexao();
+            $result = array();
+            $select = $pdo->prepare("SELECT * FROM componentes WHERE idcomponentes = :id");
+            $select->bindValue('id', $id);
+            $select->execute();
+            $result = $select->fetch(PDO::FETCH_ASSOC);
+            return $result;
+
+        }
+        // update
+        public function atualiza($name, $description, $id_update){
+
+            $pdo = conexao();
+            $update = $pdo->prepare("UPDATE componentes SET nome = :nome, descricao = :descricao WHERE idcomponentes = :id");
+            $update->bindValue('nome', $name);
+            $update->bindValue('descricao', $description);
+            $update->bindValue('id', $id_update);
+            $update->execute();
+
+            return true;
+
+        }
+        //insere os dados na tabela componentes
+>>>>>>> 4e0bcbb0817270f2b5131c412c4c12a9a3d1e42c
         public function insertComponentes($name, $description, $idUser){
 
             $pdo = conexao();

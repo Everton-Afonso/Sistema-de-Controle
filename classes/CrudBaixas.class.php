@@ -10,9 +10,19 @@
 
             $pdo = conexao();
             $result = array();
-            $select = $pdo->query("SELECT * FROM baixas INNER JOIN estoque ON 
-            estoque.idestoque = baixas.estoque_idestoque INNER JOIN componentes ON 
-            componentes.idcomponentes = estoque.componentes_idcomponentes ORDER BY nome");
+            $select = $pdo->query("SELECT * FROM baixas INNER JOIN estoque ON idestoque = estoque_idestoque 
+            INNER JOIN componentes ON idcomponentes = componentes_idcomponentes ORDER BY nome");
+            $result = $select->fetchAll(PDO::FETCH_ASSOC);
+            return $result;
+
+        }
+        //pesquisa o nome desejado
+        public function pesquisar($name){
+
+            $pdo = conexao();
+            $result = array();
+            $select = $pdo->query("SELECT * FROM baixas INNER JOIN estoque ON idestoque = estoque_idestoque 
+            INNER JOIN componentes ON idcomponentes = componentes_idcomponentes WHERE nome LIKE '".$name."%'");
             $result = $select->fetchAll(PDO::FETCH_ASSOC);
             return $result;
 
@@ -22,9 +32,9 @@
 
             $pdo = conexao();
             $result = array();
-            $select = $pdo->query("SELECT nome, quantidade, motivo, data  FROM baixas INNER JOIN estoque ON 
-            estoque.idestoque = baixas.estoque_idestoque INNER JOIN componentes ON 
-            componentes.idcomponentes = estoque.componentes_idcomponentes ORDER BY nome LIMIT $inicio, $limit");
+            $select = $pdo->query("SELECT nome, qtdBaixas, quantidade, motivo, data  FROM baixas INNER JOIN estoque ON 
+            idestoque = estoque_idestoque INNER JOIN componentes ON 
+            idcomponentes = componentes_idcomponentes ORDER BY nome LIMIT $inicio, $limit");
             $result = $select->fetchAll(PDO::FETCH_ASSOC);
             return $result;
   
@@ -35,8 +45,8 @@
             $pdo = conexao();
             $result = array();
             $select = $pdo->prepare("SELECT * FROM baixas INNER JOIN estoque ON 
-            estoque.idestoque = baixas.estoque_idestoque INNER JOIN componentes ON 
-            componentes.idcomponentes = estoque.componentes_idcomponentes AND idbaixas = :id");
+            idestoque = estoque_idestoque INNER JOIN componentes ON 
+            idcomponentes = componentes_idcomponentes AND idbaixas = :id");
             $select->bindValue('id', $id);
             $select->execute();
             $result = $select->fetch(PDO::FETCH_ASSOC);
@@ -68,9 +78,9 @@
 
             $pdo = conexao();
             //verificando se o componente ja foi cadastrado    
-            $select = $pdo->prepare("SELECT nome FROM estoque INNER JOIN componentes ON componentes.idcomponentes = 
-            estoque.componentes_idcomponentes INNER JOIN baixas ON estoque.idestoque = baixas.estoque_idestoque 
-            WHERE estoque.idestoque = :idestoque");
+            $select = $pdo->prepare("SELECT nome FROM estoque INNER JOIN componentes ON idcomponentes = 
+            componentes_idcomponentes INNER JOIN baixas ON idestoque = estoque_idestoque 
+            WHERE idestoque = :idestoque");
             $select->bindValue('idestoque', $idestoque);
             $select->execute();
   
@@ -89,9 +99,10 @@
                 }
                 
                 //insert
-                $insert = $pdo->prepare("INSERT INTO baixas(motivo, data, estoque_idestoque) 
-                VALUES (:observacao, :data, :idestoque)");
+                $insert = $pdo->prepare("INSERT INTO baixas(motivo, qtdBaixas, data, estoque_idestoque) 
+                VALUES (:observacao, :qtdBaixas, :data, :idestoque)");
                 $insert->bindValue('observacao', $observacao);
+                $insert->bindValue('qtdBaixas', $quantidade);
                 $insert->bindValue('data', $data);
                 $insert->bindValue('idestoque', $idestoque);
                 $insert->execute();

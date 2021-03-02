@@ -20,14 +20,15 @@ USE `mydb`;
 CREATE TABLE IF NOT EXISTS `baixas` (
   `idbaixas` int(11) NOT NULL AUTO_INCREMENT,
   `motivo` varchar(150) NOT NULL,
+  `qtdBaixas` int(11) NOT NULL,
   `data` date NOT NULL,
   `estoque_idestoque` int(11) NOT NULL,
   PRIMARY KEY (`idbaixas`,`estoque_idestoque`),
   KEY `fk_baixas_estoque1_idx` (`estoque_idestoque`),
   CONSTRAINT `fk_baixas_estoque1` FOREIGN KEY (`estoque_idestoque`) REFERENCES `estoque` (`idestoque`)
-) ENGINE=InnoDB AUTO_INCREMENT=40 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=43 DEFAULT CHARSET=utf8;
 
--- Copiando dados para a tabela mydb.baixas: ~3 rows (aproximadamente)
+-- Copiando dados para a tabela mydb.baixas: ~0 rows (aproximadamente)
 /*!40000 ALTER TABLE `baixas` DISABLE KEYS */;
 /*!40000 ALTER TABLE `baixas` ENABLE KEYS */;
 
@@ -40,9 +41,9 @@ CREATE TABLE IF NOT EXISTS `componentes` (
   PRIMARY KEY (`idcomponentes`,`usuario_idusuario`),
   KEY `fk_componentes_usuario1_idx` (`usuario_idusuario`),
   CONSTRAINT `fk_componentes_usuario1` FOREIGN KEY (`usuario_idusuario`) REFERENCES `usuario` (`idusuario`)
-) ENGINE=InnoDB AUTO_INCREMENT=48 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=51 DEFAULT CHARSET=utf8;
 
--- Copiando dados para a tabela mydb.componentes: ~3 rows (aproximadamente)
+-- Copiando dados para a tabela mydb.componentes: ~0 rows (aproximadamente)
 /*!40000 ALTER TABLE `componentes` DISABLE KEYS */;
 /*!40000 ALTER TABLE `componentes` ENABLE KEYS */;
 
@@ -55,9 +56,9 @@ CREATE TABLE IF NOT EXISTS `estoque` (
   PRIMARY KEY (`idestoque`,`componentes_idcomponentes`),
   KEY `fk_estoque_componentes1_idx` (`componentes_idcomponentes`),
   CONSTRAINT `fk_estoque_componentes1` FOREIGN KEY (`componentes_idcomponentes`) REFERENCES `componentes` (`idcomponentes`)
-) ENGINE=InnoDB AUTO_INCREMENT=79 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=83 DEFAULT CHARSET=utf8;
 
--- Copiando dados para a tabela mydb.estoque: ~3 rows (aproximadamente)
+-- Copiando dados para a tabela mydb.estoque: ~0 rows (aproximadamente)
 /*!40000 ALTER TABLE `estoque` DISABLE KEYS */;
 /*!40000 ALTER TABLE `estoque` ENABLE KEYS */;
 
@@ -69,7 +70,7 @@ CREATE TABLE IF NOT EXISTS `usuario` (
   PRIMARY KEY (`idusuario`)
 ) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
 
--- Copiando dados para a tabela mydb.usuario: ~0 rows (aproximadamente)
+-- Copiando dados para a tabela mydb.usuario: ~1 rows (aproximadamente)
 /*!40000 ALTER TABLE `usuario` DISABLE KEYS */;
 INSERT INTO `usuario` (`idusuario`, `user`, `pass`) VALUES
 	(1, 'autobots', '$2y$10$wQyWO1rj.DzbZlf8u/t0j.aVSeJXVrTQxOISJeKXxbBwpeb2xHO3K');
