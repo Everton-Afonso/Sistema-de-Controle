@@ -49,11 +49,8 @@
 </head>
 <body>
     <section class="banner">
-        <div id="text-banner"></div>  
-        <img src="images/autobots.jpg" alt="">  
         <div id="text-banner"></div> 
-        <?php   
-        var_dump($_GET["idBaixasPdf"]);
+        <?php  
                 if (isset($_GET["idBaixasPdf"])) {
             ?>
                     <div class="relatorio">

@@ -254,13 +254,8 @@
                                 }
                             ?>
                             <section id="left" class="col-md-4">
-<<<<<<< HEAD
                                 <form method="POST" class="form-register">
                                     <h3>Componentes</h3>
-=======
-                                <form method="POST" class="form-register" autocomplete="off">
-                                    <h3>Cadastro de Componentes</h3>
->>>>>>> 4e0bcbb0817270f2b5131c412c4c12a9a3d1e42c
                                     <div class="textboxregister">
                                         <label for="name">Nome</label>
                                         <input type="text" name="name" id="name" title="Informe o nome do componente" 
@@ -306,7 +301,6 @@
                                         $selectLimit = $componentes->selectComponentesLimit($inicio, $limit);
 
                                         if(count($dados) > 0){
-<<<<<<< HEAD
                                     ?>
                                             <tr id="title-register">
                                                 <th id="title-register">Nome</th>
@@ -314,15 +308,6 @@
                                                 <th id="title-register">Função</th>
                                             </tr>
                                     <?php 
-=======
-                                            ?>
-                                                <tr id="title-register">
-                                                    <th id="title-register">Nome</th>
-                                                    <th id="title-register">Descrição</th>
-                                                    <th id="title-register">Editar</th>
-                                                </tr>
-                                            <?php 
->>>>>>> 4e0bcbb0817270f2b5131c412c4c12a9a3d1e42c
                                             for ($i=0; $i < count($selectLimit); $i++) {            
                                                 echo "<tr>";
                                                 foreach ($selectLimit[$i] as $key => $value) {

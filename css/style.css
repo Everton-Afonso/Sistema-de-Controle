@@ -383,7 +383,6 @@ td {
 .modal-footer {
 	margin-bottom: 10px;
 }
-<<<<<<< HEAD
 /* media para responsividade da pagina */
 @media(max-width: 800px){
 	.container {
@@ -464,6 +463,4 @@ td {
 		width: 21rem;
 	}
 }
-=======
-/*testando a função busca*/
->>>>>>> 4e0bcbb0817270f2b5131c412c4c12a9a3d1e42c
+

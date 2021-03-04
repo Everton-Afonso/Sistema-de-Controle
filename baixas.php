@@ -272,13 +272,8 @@
                             }
                         ?>
                         <section id="left" class="col-md-4">
-<<<<<<< HEAD
                             <form method="POST" class="form-register">
                                 <h3>Movimentação</h3>
-=======
-                            <form method="POST" class="form-register" autocomplete="off">
-                                <h3>Baixas</h3>
->>>>>>> 4e0bcbb0817270f2b5131c412c4c12a9a3d1e42c
                                 <div class="textboxregister">
                                     <label for="name">Nome</label>
                                     <?php
@@ -313,18 +308,8 @@
                                     ?>
                                 </div>
                                 <div class="textboxregister">
-<<<<<<< HEAD
                                     <label for="quantidade">Quantidade Removida</label>
                                     <input type="number" name="quantidade" id="quantidade" title="Informe a quantidade de componentes a ser removida">
-=======
-                                    <label for="quantidade">Baixas</label>
-                                    <input type="number" name="quantidade" id="quantidade" title="Informe a quantidade de componentes a ser decrementada"
-                                    value="<?php //verifica se a variavel $result possui dados, caso a mesma possua printara o resultado
-                                                if (isset($result)) {
-                                                    echo $result['qtdBaixas'];
-                                                }
-                                            ?>">
->>>>>>> 4e0bcbb0817270f2b5131c412c4c12a9a3d1e42c
                                     <span class="check-message-register hidden">Obrigatório</span>
                                 </div>
                                 <div class="textboxregister">
@@ -440,13 +425,8 @@
                         </section>
                         <div class="relatorio col-md-12">
                             <p>
-<<<<<<< HEAD
                                 Clique aqui para gerar o relátorio de Baixas.
                                 <a target="_brack" href="geradorPdf.php?idBaixasPdf=<?php echo "1";?>" class="fa fa-file-pdf-o" aria-hidden="true"></a>
-=======
-                            Clique aqui para gerar o relátorio.
-                            <a target="_brack" href="geradorPdf.php?idBaixasPdf=<?php echo "1";?>" class="fa fa-file-pdf-o" aria-hidden="true"></a>
->>>>>>> 4e0bcbb0817270f2b5131c412c4c12a9a3d1e42c
                             </p>
                         </div>
                     </section>
