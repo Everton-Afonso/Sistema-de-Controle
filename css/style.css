@@ -4,7 +4,6 @@
 	padding: 0;
 	box-sizing: border-box;
 }
-/* Diminuir a fonte conforme o tamanho da tela */
 @media(max-width: 1080px){
     html {
         font-size: 93.75%;
@@ -44,9 +43,44 @@ strong, p {
 
 	background: rgba(0, 0, 0, 0.8);
 }
+@media(max-width: 800px){
+	.container {
+		width: 700px;
+		height: 400px;
+	}
+}
+@media(max-width: 500px){
+	.container {
+		width: 600px;
+		height: 350px;
+	}
+}
 .form {
 	display: grid;
 	grid-template-columns: 1fr 1fr;
+}
+@media(max-width: 700px){
+	.form {
+		display: flex;
+		justify-content: center;
+		align-items: center;
+	}
+	.left {
+		opacity: 0; /* Esconde no desktop. */
+    	height: 0;
+	}
+	.left > img {
+		opacity: 0; /* Esconde no desktop. */
+    	height: 0;
+	}
+	.copyright {
+		opacity: 0; /* Esconde no desktop. */
+    	height: 0;
+	}
+	.copyright > div > strong{
+		opacity: 0; /* Esconde no desktop. */
+    	height: 0;
+	}
 }
 .left {
 	text-align: center;
@@ -81,13 +115,34 @@ strong, p {
 	height: 6.25rem;
 	margin-top: 2.5rem;
 	margin-left: 3.123rem;
+	align-items: center;
+	justify-content: center;
+	display: flex;
+}
+@media(max-width: 800px){
+	.right > img {
+		margin-left: 1.6rem;
+	}
+}
+@media(max-width: 600px){
+	.right > img {
+		margin-left: 4.3rem;
+	}
+}
+@media(max-width: 400px){
+	.right > img {
+		margin-left: 2.5rem;
+	}
+}
+@media(max-width: 350px){
+	.right > img {
+		margin-left: 1.2rem;
+	}
 }
 .right  > strong {
 	font-size: 1.5rem;
 	font-weight: 600;
-	display: flex;
-	justify-content: center;
-	align-items: center;
+	padding-left: 44%;
 }
 .right > form {
 	padding-bottom: 15px;
@@ -95,7 +150,8 @@ strong, p {
 .textbox {
 	margin-top: 0.5rem;
 }
-.textbox input {
+#user,
+#password {
 	width: 24.5rem;
 	height: 2.5rem;
 	border: none;
@@ -108,6 +164,50 @@ strong, p {
 .textbox input:focus + .check-message,
 .textboxregister input:focus + .check-message-register {
 	display: none;
+}
+@media(max-width: 800px){
+	#user,
+	#password{
+		margin-top: 0.5rem;
+		padding: 0 auto;
+		width: 21rem;
+	}
+	.right  > strong {
+		padding-left: 45%;
+	}
+}
+@media(max-width: 500px){
+	#user,
+	#password{
+		margin-top: 0.5rem;
+		padding: 0 auto;
+		width: 27.5rem;
+	}
+	.right  > strong {
+		padding-left: 42%;
+	}
+}
+@media(max-width: 400px){
+	#user,
+	#password{
+		margin-top: 0.5rem;
+		padding: 0 auto;
+		width: 24.5rem;
+	}
+	.right  > strong {
+		padding-left: 41%;
+	}
+}
+@media(max-width: 350px){
+	#user,
+	#password{
+		margin-top: 0.5rem;
+		padding: 0 auto;
+		width: 21rem;
+	}
+	.right  > strong {
+		padding-left: 43%;
+	}
 }
 .login-btn {
 	width: 30%;
@@ -133,23 +233,102 @@ strong, p {
 .hidden {
 	display: none;
 }
-.check-message {
+.textbox > .check-message {
 	position: absolute;
-	padding-bottom: 25px;
-	right: 1.5rem;
-	color: #ffff00;
+	padding-bottom: 10px;
+	right: 1rem;
+	color: #ffff00 !important;
 	transform: translateY(-50%);
+}
+@media(max-width: 500px){
+	.check-message {
+		right: 2.5rem;
+	}
+}
+@media(max-width: 400px){
+	.check-message {
+		right: 1.7rem;
+	}
 }
 .erro {
 	color: #ffff00;
 }
 /* Fim da estilização da tela de login */
-
-.fixed-top {
+/* tela de cadastro */
+.container-fluid {
+	font-family: "Inter", sans-serif;
+}
+.NavBarContainer{
+    width: 100%;
+    max-width: 1300px;
+    margin-right: auto;
+    margin-left: auto;
+    padding-left: 50px;
+    padding-right: 50px;
+	background: transparent;
 	position: absolute;
 }
-.page-header {
-    min-height: 60vh !important;
+@media(max-width: 911px){
+	.NavBarContainer{
+		padding-left: 30px;
+		padding-right: 30px;
+	}
+}
+.NavLogo{
+    justify-self: flex-start;
+    cursor: pointer;
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    
+}
+.NavLogo > p {
+	color: #DCDDE0;
+	font-size: 1.2rem;
+	font-weight: 700;
+	padding-left: 15px;
+	margin-top: 20px;
+}
+.NavLogo > img {
+	width: 35px;
+}
+.navbar-nav .nav-link{
+	text-align: center;
+	color: #DCDDE0 !important;
+}
+.NavLink {
+	font-size: 1.2rem;
+	font-weight: 800 !important;
+}
+.navbar-toggler {
+	background-color: #DCDDE0 !important;
+}
+.NavItem {
+	height: 38px;
+    border-bottom: 3px solid transparent;
+}
+.NavItem:hover {
+	border-bottom: 3px solid #fff;
+}
+@media (max-width: 800px){
+	.NavItem:hover {
+		width: 100%;
+		border-bottom: none;
+	}   
+}
+.banner {
+	display: flex;
+	height: 16rem;
+
+	background: linear-gradient(0deg, rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.5)), 
+	url(../img/bannerIf.jpg);
+	background-repeat: no-repeat;
+	background-position: center;
+
+}
+.containerTabela {
+	display: flex;
+	background-color: #DCDDE0 !important;
 }
 .card-image .card {
 	min-height: 0;
@@ -159,8 +338,43 @@ strong, p {
 	text-transform: uppercase;
 	font-weight: 500;
 }
+.erro {
+	color: #fab526;
+	font-size: 20px;
+	font-weight: 600;
+}
+#left {
+	margin-bottom: 37px;
+}
+.textbox {
+	width: 100%;
+	height: 50px;
+	position: relative;
+	margin-top: 15px;
+}
+.textbox input {
+	width: 100%;
+	height: 50px;
+	border: none;
+	background: rgba(43, 43, 43, 0.7);
+	padding: 0 15px;
+	font-size: 16px;
+	outline: none;
+	color: #f4f4ff;
+}
 .textbox input:focus {
 	background: rgba(72, 72, 68, 0.6) !important;
+}
+.check-message {
+	position: absolute;
+	top: 70%;
+	right: 10px;
+	color: #fff;
+	transform: translateY(-50%);
+}
+.textbox input:focus + .check-message,
+.textboxregister input:focus + .check-message-register {
+	display: none;
 }
 .options {
 	margin-top: 15px;
@@ -199,13 +413,33 @@ strong, p {
 .options a {
 	color: #f4f4f480;
 }
+.login-btn {
+	width: 30%;
+	height: 40px;
+	margin-top: 30px;
+	background: rgba(25, 25, 25, 0.7);
+	border: none;
+	outline: none;
+	cursor: pointer;
+	text-transform: uppercase;
+	font-weight: 700;
+	transition: 0.3s linear;
+}
+.login-btn.active,
+.register-btn.active {
+	background: #037bee;
+	color: #fff;
+}
+.login-btn.active:hover,
+.register-btn.active:hover {
+	opacity: 0.7;
+}
+.hidden {
+	display: none;
+}
 /* ----------- Tela cadastro -----------  */
 .container-register {
 	display: flex;
-}
-/* foi add essa parte para que o formulario e a tabala ficasem na mesma altura */
-.container-register #left {
-	margin-top: -1.85rem;
 }
 /* criado*/
 .alert-erro {
@@ -214,7 +448,6 @@ strong, p {
 	min-width: 320px;
 	position: absolute;
 	right: 0px;
-	top: -0rem;
 	overflow: hidden;
 	border-radius: 4px;
 	border-left: 8px solid #f00e0e;
@@ -230,21 +463,13 @@ strong, p {
 	padding: 0 12px;
 	font-weight: 700;
 }
-.alert-erro .close-btn {
-	position: absolute;
-	padding: 30px 20px;
-	right: 0px;
-	top: 50%;
-	transform: translateY(-50%);
-	background: #f00e0e;
-}
+
 .alert-acerto {
 	background-color: rgba(50, 205, 50, 0.7);
 	padding: 20px 40px;
 	min-width: 320px;
 	position: absolute;
 	right: 0px;
-	top: -0rem;
 	overflow: hidden;
 	border-radius: 4px;
 	border-left: 8px solid #238e23;
@@ -260,36 +485,17 @@ strong, p {
 	padding: 0 12px;
 	font-weight: 700;
 }
-.alert-acerto .close-btn {
-	position: absolute;
-	padding: 30px 20px;
-	right: 0px;
-	top: 50%;
-	transform: translateY(-50%);
-	background: #238e23;
-}
 /* ate aqui*/
 .form-register {
-	width: 330px;
+	width: 290px;
 	padding: 20px;
-	margin: 30px auto;
+	margin: 0 auto;
 	border: 1px solid rgba(0, 0, 0, 0.3);
+	margin-top: 1.9rem;
 }
 .form-register h3 {
 	text-align: center;
-	margin-top: 5px;
-	margin-bottom: 10px;
 	font-weight: 700;
-}
-.form-register label {
-	margin-top: 2px;
-	margin-bottom: 2px;
-}
-.buscar {
-	width: 90%;
-	margin: auto;
-	padding: 8px;
-	border: 1px solid rgba(0, 0, 0, 0.3);
 }
 .textboxregister label,
 input,
@@ -298,10 +504,6 @@ select {
 	outline: none;
 	line-height: 25px;
 	width: 100%;
-}
-.textboxregister label,
-select {
-	height: 30px;
 }
 .textboxregister {
 	position: relative;
@@ -329,18 +531,18 @@ select {
 	font-weight: 700;
 	transition: 0.3s linear;
 }
-table {
-	width: 90%;
-	margin: auto;
+#right {
+	margin-top: 30px;
 }
 tr {
 	line-height: 30px;
 }
 #title-register {
 	font-weight: bold;
-	width: 330px;
+	width: 200px;
 	border: 1px solid rgba(0, 0, 0, 0.3);
 	text-align: center;
+	font-size: 1rem;
 }
 a {
 	text-decoration: none;
@@ -366,12 +568,10 @@ td {
 }
 .pagina {
 	text-align: center;
-	padding-top: 10px;
+	padding-top: 20px;
 	color: #f7765f;
 	font-weight: 700;
-}
-.modal-footer {
-	margin-bottom: 10px;
+	margin-bottom: 30px;
 }
 .relatorio {
 	text-align: center;
@@ -380,87 +580,55 @@ td {
 	color: red;
 	font-size: 24px;
 }
+.modal-content {
+	background: #DCDDE0;
+}
+.modal-body > p {
+	color: #ff0000;
+}
 .modal-footer {
 	margin-bottom: 10px;
 }
-/* media para responsividade da pagina */
+.relatorio {
+	text-align: center;
+	color: #000 !important;
+}
+.relatorio > p {
+	color: #000 !important;
+}
+.relatorio a {
+	color: red;
+	font-size: 24px;
+}
+.Copy {
+	align-items: center;
+	justify-content: center;
+	display: flex;
+	background: rgba(0, 0, 0, 0.8);
+	height: 50px;
+
+	left: 0;
+	bottom: 0;
+	width: 100%;
+}
+.Copy > div > strong {
+	font-size: 0.8rem;
+}
 @media(max-width: 800px){
-	.container {
-		width: 700px;
-		height: 400px;
-	}
-	.right > img {
-		margin-left: 1.6rem;
-	}
-	.textbox  > input{
-		margin-top: 0.5rem;
-		padding: 0 auto;
-		width: 21rem;
-	}
-}
-@media(max-width: 700px){
-	.form {
+	.container-register {
 		display: flex;
-		justify-content: center;
 		align-items: center;
+		justify-content: center;
+		flex-direction: column;
 	}
-	.left {
-		opacity: 0; /* Esconde no desktop. */
-    	height: 0;
-	}
-	.left > img {
-		opacity: 0; /* Esconde no desktop. */
-    	height: 0;
-	}
-	.copyright {
-		opacity: 0; /* Esconde no desktop. */
-    	height: 0;
-	}
-	.copyright > div > strong{
-		opacity: 0; /* Esconde no desktop. */
-    	height: 0;
+	#right {
+		margin-top: 0;
 	}
 }
-@media(max-width: 600px){
-	.right > img {
-		margin-left: 4.3rem;
-	}
-}
-@media(max-width: 500px){
-	.container {
-		width: 600px;
-		height: 350px;
-	}
-	.check-message {
-		right: 2.5rem;
-	}
-	.textbox > input{
-		margin-top: 0.5rem;
-		padding: 0 auto;
-		width: 27.5rem;
-	}
-}
-@media(max-width: 400px){
-	.right > img {
-		margin-left: 2.5rem;
-	}
-	.check-message {
-		right: 1.7rem;
-	}
-	.textbox > input{
-		margin-top: 0.5rem;
-		padding: 0 auto;
-		width: 24.5rem;
-	}
-}
-@media(max-width: 350px){
-	.right > img {
-		margin-left: 1.2rem;
-	}
-	.textbox > input{
-		margin-top: 0.5rem;
-		padding: 0 auto;
-		width: 21rem;
+@media (min-width: 768px){
+	.Table {
+		max-width: 100%;
 	}
 }
 
+/* ----------- Fim da tela cadastro -----------  */

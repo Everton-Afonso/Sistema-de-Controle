@@ -1,7 +1,7 @@
 <?php
     // Faz o usuario sair da aplicação
-    require_once './classes/CrudComponentes.class.php';
-    $componentes = new Componente();
+    require_once './classes/CrudEstoque.class.php';
+    $componentes = new Estoque();
     $componentes->exit();
 
 ?>
