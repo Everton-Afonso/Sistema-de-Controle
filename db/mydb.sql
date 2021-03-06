@@ -46,17 +46,6 @@ CREATE TABLE IF NOT EXISTS `estoque` (
 ) ENGINE=InnoDB AUTO_INCREMENT=87 DEFAULT CHARSET=utf8;
 
 -- Copiando dados para a tabela mydb.estoque: ~8 rows (aproximadamente)
-/*!40000 ALTER TABLE `estoque` DISABLE KEYS */;
-INSERT INTO `estoque` (`idestoque`, `nome`, `localizacao`, `descricao`, `quantidade`, `usuario_idusuario`) VALUES
-	(79, 'Led', 'Armario', 'Led De Auto Brilho', 33, 1),
-	(80, 'Arduino', 'Prateleira', 'Placa', 27, 1),
-	(81, 'Led Vermelho', 'Armario', 'Lede De Auto Brilho', 600, 1),
-	(82, 'teste', 'teste', 'teste', 2, 1),
-	(83, 'Teste3', 'Placa', 'Prateleira', 4, 1),
-	(84, 'Teste 2', 'Placa', 'Armario', 5, 1),
-	(85, 'Arduino Uno', 'Placa', 'Armario', 50, 1),
-	(86, 'Teste 1', 'Placa', 'Prateleira', 50, 1);
-/*!40000 ALTER TABLE `estoque` ENABLE KEYS */;
 
 -- Copiando estrutura para tabela mydb.usuario
 CREATE TABLE IF NOT EXISTS `usuario` (

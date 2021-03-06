@@ -51,7 +51,7 @@
                 <div class="collapse navbar-collapse" id="menu">
                   <ul class="navbar-nav ml-auto">
                     <li class="nav-item NavItem">
-                      <a class="nav-link active NavLink" href="#">Movimentação</a>
+                      <a class="nav-link active NavLink" href="baixas.php">Movimentação</a>
                     </li>
                     <li class="nav-item NavItem">
                         <a class="nav-link active NavLink" href="logout.php">Sair</a>
