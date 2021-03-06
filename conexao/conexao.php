@@ -1,6 +1,9 @@
 <?php
 
-    session_start();
+    if(session_status() !== PHP_SESSION_ACTIVE) { 
+        session_start(); 
+    } 
+    ob_start();
 
     function conexao(){
 
@@ -17,5 +20,6 @@
         return $pdo;
         
     }
-
+    
+    ob_end_flush();
 ?>

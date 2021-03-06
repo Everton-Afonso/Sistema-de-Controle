@@ -40,7 +40,7 @@
                         <p>Bem Vindo
                             <?php 
                                 $idUser = (int)$_SESSION['id'];
-                                echo $estoque->selectUser($idUser);
+                                echo ucfirst($estoque->selectUser($idUser));
                             ?>
                         </p>
                 </a>
