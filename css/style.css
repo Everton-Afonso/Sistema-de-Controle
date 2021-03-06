@@ -1,4 +1,4 @@
-/* Estilização da tela de login */
+/* Estilizações globais */
 * {
 	margin: 0;
 	padding: 0;
@@ -14,9 +14,7 @@
         font-size: 87.5%;
     }
 } 
-strong, p {
-	color: #DCDDE0;
-}
+/* Estilizações do login */
 .overlay {
 	flex: 1;
 	display: flex;
@@ -43,44 +41,9 @@ strong, p {
 
 	background: rgba(0, 0, 0, 0.8);
 }
-@media(max-width: 800px){
-	.container {
-		width: 700px;
-		height: 400px;
-	}
-}
-@media(max-width: 500px){
-	.container {
-		width: 600px;
-		height: 350px;
-	}
-}
 .form {
 	display: grid;
 	grid-template-columns: 1fr 1fr;
-}
-@media(max-width: 700px){
-	.form {
-		display: flex;
-		justify-content: center;
-		align-items: center;
-	}
-	.left {
-		opacity: 0; /* Esconde no desktop. */
-    	height: 0;
-	}
-	.left > img {
-		opacity: 0; /* Esconde no desktop. */
-    	height: 0;
-	}
-	.copyright {
-		opacity: 0; /* Esconde no desktop. */
-    	height: 0;
-	}
-	.copyright > div > strong{
-		opacity: 0; /* Esconde no desktop. */
-    	height: 0;
-	}
 }
 .left {
 	text-align: center;
@@ -95,6 +58,7 @@ strong, p {
 .left > strong {
 	font-size: 1.5rem;
 	font-weight: 600;
+	color: #DCDDE0;
 
 }
 .copyright {
@@ -103,10 +67,14 @@ strong, p {
 }
 .copyright > div > strong {
 	font-size: 0.8rem;
+	color: #DCDDE0;
 }
 .right {
 	display: grid;
     grid-template-columns: 1fr;
+}
+.right > strong {
+	color: #DCDDE0;
 }
 .right p {
 	text-align: center;
@@ -118,26 +86,6 @@ strong, p {
 	align-items: center;
 	justify-content: center;
 	display: flex;
-}
-@media(max-width: 800px){
-	.right > img {
-		margin-left: 1.6rem;
-	}
-}
-@media(max-width: 600px){
-	.right > img {
-		margin-left: 4.3rem;
-	}
-}
-@media(max-width: 400px){
-	.right > img {
-		margin-left: 2.5rem;
-	}
-}
-@media(max-width: 350px){
-	.right > img {
-		margin-left: 1.2rem;
-	}
 }
 .right  > strong {
 	font-size: 1.5rem;
@@ -164,50 +112,6 @@ strong, p {
 .textbox input:focus + .check-message,
 .textboxregister input:focus + .check-message-register {
 	display: none;
-}
-@media(max-width: 800px){
-	#user,
-	#password{
-		margin-top: 0.5rem;
-		padding: 0 auto;
-		width: 21rem;
-	}
-	.right  > strong {
-		padding-left: 45%;
-	}
-}
-@media(max-width: 500px){
-	#user,
-	#password{
-		margin-top: 0.5rem;
-		padding: 0 auto;
-		width: 27.5rem;
-	}
-	.right  > strong {
-		padding-left: 42%;
-	}
-}
-@media(max-width: 400px){
-	#user,
-	#password{
-		margin-top: 0.5rem;
-		padding: 0 auto;
-		width: 24.5rem;
-	}
-	.right  > strong {
-		padding-left: 41%;
-	}
-}
-@media(max-width: 350px){
-	#user,
-	#password{
-		margin-top: 0.5rem;
-		padding: 0 auto;
-		width: 21rem;
-	}
-	.right  > strong {
-		padding-left: 43%;
-	}
 }
 .login-btn {
 	width: 30%;
@@ -240,21 +144,12 @@ strong, p {
 	color: #ffff00 !important;
 	transform: translateY(-50%);
 }
-@media(max-width: 500px){
-	.check-message {
-		right: 2.5rem;
-	}
-}
-@media(max-width: 400px){
-	.check-message {
-		right: 1.7rem;
-	}
-}
 .erro {
 	color: #ffff00;
+	font-size: 1rem;
+	margin-bottom: -12px;
 }
-/* Fim da estilização da tela de login */
-/* tela de cadastro */
+/* menu das telas */
 .container-fluid {
 	font-family: "Inter", sans-serif;
 }
@@ -267,12 +162,6 @@ strong, p {
     padding-right: 50px;
 	background: transparent;
 	position: absolute;
-}
-@media(max-width: 911px){
-	.NavBarContainer{
-		padding-left: 30px;
-		padding-right: 30px;
-	}
 }
 .NavLogo{
     justify-self: flex-start;
@@ -310,12 +199,6 @@ strong, p {
 .NavItem:hover {
 	border-bottom: 3px solid #fff;
 }
-@media (max-width: 800px){
-	.NavItem:hover {
-		width: 100%;
-		border-bottom: none;
-	}   
-}
 .banner {
 	display: flex;
 	height: 16rem;
@@ -326,6 +209,7 @@ strong, p {
 	background-position: center;
 
 }
+/* corpo das telas */
 .containerTabela {
 	display: flex;
 	background-color: #DCDDE0 !important;
@@ -338,11 +222,7 @@ strong, p {
 	text-transform: uppercase;
 	font-weight: 500;
 }
-.erro {
-	color: #fab526;
-	font-size: 20px;
-	font-weight: 600;
-}
+
 #left {
 	margin-bottom: 37px;
 }
@@ -611,10 +491,110 @@ td {
 	bottom: 0;
 	width: 100%;
 }
-.Copy > div > strong {
-	font-size: 0.8rem;
+.Copy > div > div > strong {
+	font-size: 1rem;
+	color: #DCDDE0 ;
 }
-@media(max-width: 800px){
+/* responsividade das telas */
+@media(max-width: 350px){
+	.right > img {
+		margin-left: 1.2rem;
+	}
+	#user,
+	#password{
+		margin-top: 0.5rem;
+		padding: 0 auto;
+		width: 21rem;
+	}
+	.right  > strong {
+		padding-left: 43%;
+	}
+}
+@media(max-width: 400px){
+	.check-message {
+		right: 1.7rem;
+	}
+	.right > img {
+		margin-left: 2.5rem;
+	}
+	#user,
+	#password{
+		margin-top: 0.5rem;
+		padding: 0 auto;
+		width: 24.5rem;
+	}
+	.right  > strong {
+		padding-left: 41%;
+	}
+}
+@media(max-width: 500px){
+	.check-message {
+		right: 2.5rem;
+	}
+	.container {
+		width: 600px;
+		height: 350px;
+	}
+	#user,
+	#password{
+		margin-top: 0.5rem;
+		padding: 0 auto;
+		width: 27.5rem;
+	}
+	.right  > strong {
+		padding-left: 42%;
+	}
+}
+@media(max-width: 600px){
+	.right > img {
+		margin-left: 4.3rem;
+	}
+}
+@media(max-width: 700px){
+	.form {
+		display: flex;
+		justify-content: center;
+		align-items: center;
+	}
+	.left {
+		opacity: 0; /* Esconde no desktop. */
+    	height: 0;
+	}
+	.left > img {
+		opacity: 0; /* Esconde no desktop. */
+    	height: 0;
+	}
+	.copyright {
+		opacity: 0; /* Esconde no desktop. */
+    	height: 0;
+	}
+	.copyright > div > strong{
+		opacity: 0; /* Esconde no desktop. */
+    	height: 0;
+	}
+}
+@media (min-width: 768px){
+	.Table {
+		max-width: 100%;
+	}
+	#right {
+		margin-top: 30px;
+		width: 0;
+		height: 0;
+	}
+}
+@media (max-width: 800px){
+	.NavItem:hover {
+		width: 100%;
+		border-bottom: none;
+	}   
+	.right > img {
+		margin-left: 1.6rem;
+	}
+	.container {
+		width: 700px;
+		height: 400px;
+	}
 	.container-register {
 		display: flex;
 		align-items: center;
@@ -624,11 +604,29 @@ td {
 	#right {
 		margin-top: 0;
 	}
-}
-@media (min-width: 768px){
-	.Table {
-		max-width: 100%;
+	#user,
+	#password{
+		margin-top: 0.5rem;
+		padding: 0 auto;
+		width: 21rem;
+	}
+	.right  > strong {
+		padding-left: 45%;
 	}
 }
-
-/* ----------- Fim da tela cadastro -----------  */
+@media(max-width: 911px){
+	.NavBarContainer{
+		padding-left: 30px;
+		padding-right: 30px;
+	}
+}
+@media(max-width: 1440px){
+	.tabelaBaixas{
+		max-width: 850px;
+	}
+	#right {
+		margin-top: 30px;
+		width: 900px;
+		height: 40vw;
+	}
+}
