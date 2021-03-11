@@ -516,6 +516,11 @@ a {
 	.right  > strong {
 		padding-left: 45%;
 	}
+	/* tela de cadastro e baixas */ 
+	.NavItem:hover {
+		width: 100%;
+		border-bottom: none;
+	}
 }
 @media (max-width: 800px){
 	/* tela de login */
@@ -535,11 +540,7 @@ a {
 	.right  > strong {
 		padding-left: 45%;
 	}
-	/* tela de cadastro e baixas */
-	.NavItem:hover {
-		width: 100%;
-		border-bottom: none;
-	}  
+	/* tela de cadastro e baixas */  
 	.flex-container > .leftForm,
 	.rightTable {
 		width: 700px !important;
