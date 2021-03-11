@@ -238,51 +238,12 @@
                 ?>
                             <td>
                                 <a href="baixas.php?id_up=<?php echo $dados[$i]["idbaixas"];?>" id="to-edit">Editar</a>
-                                <a data-toggle="modal" data-target="#myModal" id="delete" <?php $_SESSION["idbaixas"] = $dados[$i]["idbaixas"];?>>Excluir</a> <!-- pegando idestoque para poder exclui-lo -->
                             </td>
                 <?php
                             echo "</tr>";
                         }
                 ?>
             </table>
-            <!-- Modal -->
-            <div id="myModal" class="modal fade" tabindex="-1" role="dialog">
-                <div class="modal-dialog" role="document">
-                    <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title">Tem certeza de que deseja excluir os dados ?</h5>
-                    </div>
-                    <div class="text-center mt-3">
-                        <?php
-
-                            $dados = $baixas->selectId((int)$_SESSION["idbaixas"]);
-
-                            if(count($dados) > 0){
-                                
-                                echo "<h5> Nome: ".$dados['nome']."</h5>";
-                                
-                            }
-                        ?>
-                    </div>  
-                    <div class="modal-body">
-                        <p>Caso os dados sejam excluidos, não sera possível desfazer essa ação!!.</p>
-                    </div>
-                    <div class="modal-footer justify-content-center">
-                        <a href="#" class="btn btn-danger" data-dismiss="modal">Não</a>
-                        <a href="baixas.php?id=<?php echo $_SESSION["idbaixas"];?>" class="btn btn-success">Sim</a>
-                        <?php
-                            // vefificando se o iditen foi pego corretamente, caso ele tenha sido pego a função deleteItens irá exclui-lo
-                            if (isset($_GET["id"])) {
-                                $idbaixas = addslashes($_GET["id"]);
-                                $baixas->deleteBaixas($idbaixas);
-                                header("Location: baixas.php");
-                            }
-                        ?>
-                    </div>
-                    </div>
-                </div>
-            </div>
-            <!-- Final Modal -->
             <div class="pagina">
                 <?php
                         for ($i=1; $i <= $total; $i++){
