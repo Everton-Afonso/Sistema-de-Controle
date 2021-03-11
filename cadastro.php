@@ -33,75 +33,45 @@
 </head>
 <body>
     <header>
-        <div class="container-fluid">
-            <nav class="navbar navbar-expand-lg navbar-light NavBarContainer">
-                <a class="navbar-brand NavLogo" href="#">
-                    <img src="./img/logoIf.png" alt="If">
-                        <p>Bem Vindo
-                            <?php 
-                                $idUser = (int)$_SESSION['id'];
-                                echo ucfirst($estoque->selectUser($idUser));
-                            ?>
-                        </p>
-                </a>
-                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#menu" aria-controls="menu" aria-expanded="false" aria-label="Toggle navigation">
-                  <span class="navbar-toggler-icon"></span>
-                </button>
-              
-                <div class="collapse navbar-collapse" id="menu">
-                  <ul class="navbar-nav ml-auto">
-                    <li class="nav-item NavItem">
-                      <a class="nav-link active NavLink" href="baixas.php">Movimentação</a>
+        <nav class="navbar navbar-expand-lg navbar-light NavBarContainer">
+            <a class="navbar-brand NavLogo" href="#">
+                <img src="./img/logoIf.png" alt="If">
+                    <p>Bem Vindo
+                        <?php 
+                            $idUser = (int)$_SESSION['id'];
+                            echo ucfirst($estoque->selectUser($idUser));
+                        ?>
+                    </p>
+            </a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#menu" aria-controls="menu" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            
+            <div class="collapse navbar-collapse" id="menu">
+                <ul class="navbar-nav ml-auto">
+                <li class="nav-item NavItem">
+                    <a class="nav-link active NavLink" href="baixas.php">Movimentação</a>
+                </li>
+                <li class="nav-item NavItem">
+                    <a class="nav-link active NavLink" href="logout.php">Sair</a>
                     </li>
-                    <li class="nav-item NavItem">
-                        <a class="nav-link active NavLink" href="logout.php">Sair</a>
-                      </li>
-                  </ul>
-                </div>
-              </nav>
-        </div>
+                </ul>
+            </div>
+            </nav>
     </header>
     <div class="banner"></div>
-    <div class="containerTabela">
-        <section class="container-register row">
-            <?php
-                if (isset($_POST['name'])) {  //clicou no botão cadastrar ou atualizar.
-                    //verifica se é o botão atualizar que foi clicado.
-                    if (isset($_GET['id_up']) && !empty($_GET['id_up'])){
+    <div class="flex-container">
+        <?php
+            if (isset($_POST['name'])) {  //clicou no botão cadastrar ou atualizar.
+                //verifica se é o botão atualizar que foi clicado.
+                if (isset($_GET['id_up']) && !empty($_GET['id_up'])){
 
-                        $id_update = (int)$_GET['id_up'];
-                        $name = addslashes($_POST['name']);
-                        $description = addslashes($_POST['description']);
-                        $quantidade = intval($_POST['amount']);
-                        $observacao = addslashes($_POST['localization']);
-                        
-
-                        if (!empty($name) && !empty($description) && !empty($quantidade) && !empty($observacao)) {
-
-                            $name = ucwords(strtolower($name));
-                            $description = ucwords(strtolower($description));
-                            $observacao = ucwords(strtolower($observacao));
-
-                            if($estoque->atualiza($name, $description, $quantidade, $observacao, $id_update)){
-
-                                header("Location: cadastro.php");
-
-                            }else {
-            ?>
-                                <div class="alert-erro">
-                                    <span class="msg">Erro ao tentar atualizar o componente</span>
-                                </div>
-            <?php                
-                        }
-                    } 
-
-                } else { // caso contrario foi o botão cadastrar.
-
-                        $idUser = (int)$_SESSION['id'];
-                        $name = addslashes($_POST['name']);
-                        $description = addslashes($_POST['description']);
-                        $quantidade = intval($_POST['amount']);
-                        $observacao = addslashes($_POST['localization']);
+                    $id_update = (int)$_GET['id_up'];
+                    $name = addslashes($_POST['name']);
+                    $description = addslashes($_POST['description']);
+                    $quantidade = intval($_POST['amount']);
+                    $observacao = addslashes($_POST['localization']);
+                    
 
                     if (!empty($name) && !empty($description) && !empty($quantidade) && !empty($observacao)) {
 
@@ -109,95 +79,122 @@
                         $description = ucwords(strtolower($description));
                         $observacao = ucwords(strtolower($observacao));
 
-                        if(!$estoque->insertEstoque($name, $description, $observacao, $quantidade, $idUser)){
-            ?>                    
-                            <div class="alert-erro">
-                                <span class="msg">Componente já esta cadastrado</span>
-                            </div>
-            <?php
+                        if($estoque->atualiza($name, $description, $quantidade, $observacao, $id_update)){
+
+                            header("Location: cadastro.php");
+
                         }else {
-            ?>
-                            <div class="alert-acerto">
-                                <span class="msg">Componente cadastrado com sucesso</span>
-                            </div>
-            <?php                
-                            }
-                        } else {
-            ?>
+        ?>
                             <div class="alert-erro">
-                                    <span class="msg"><?php echo "Preencha todos os dados"; ?></span>
+                                <span class="msg">Erro ao tentar atualizar o componente</span>
                             </div>
-            <?php
+        <?php                
+                    }
+                } 
+
+            } else { // caso contrario foi o botão cadastrar.
+
+                    $idUser = (int)$_SESSION['id'];
+                    $name = addslashes($_POST['name']);
+                    $description = addslashes($_POST['description']);
+                    $quantidade = intval($_POST['amount']);
+                    $observacao = addslashes($_POST['localization']);
+
+                if (!empty($name) && !empty($description) && !empty($quantidade) && !empty($observacao)) {
+
+                    $name = ucwords(strtolower($name));
+                    $description = ucwords(strtolower($description));
+                    $observacao = ucwords(strtolower($observacao));
+
+                    if(!$estoque->insertEstoque($name, $description, $observacao, $quantidade, $idUser)){
+        ?>                    
+                        <div class="alert-erro">
+                            <span class="msg">Componente já esta cadastrado</span>
+                        </div>
+        <?php
+                    }else {
+        ?>
+                        <div class="alert-acerto">
+                            <span class="msg">Componente cadastrado com sucesso</span>
+                        </div>
+        <?php                
                         }
-                    } 
-                }
-                //verificar se o usuraio clicou no botão editar, e retornara os dados selecionados pelo id
-                if (isset($_GET['id_up'])) {
+                    } else {
+        ?>
+                        <div class="alert-erro">
+                                <span class="msg"><?php echo "Preencha todos os dados"; ?></span>
+                        </div>
+        <?php
+                    }
+                } 
+            }
+            //verificar se o usuraio clicou no botão editar, e retornara os dados selecionados pelo id
+            if (isset($_GET['id_up'])) {
 
-                    $id_update = addslashes($_GET['id_up']);
-                    $result = $estoque->selectId($id_update);
+                $id_update = addslashes($_GET['id_up']);
+                $result = $estoque->selectId($id_update);
 
-                }
-            ?>
-            <section id="left" class="col-md-4">
-                <form method="POST" class="form-register">
-                    <h3>Componentes</h3>
-                    <div class="textboxregister">
-                        <label for="name">Nome</label>
-                        <input type="text" name="name" id="name" title="Informe o nome do componente"
+            }
+        ?>
+        <div class="leftForm">
+            <form method="POST" class="form-register">
+                <h3>Componentes</h3>
+                <div class="textboxregister">
+                    <label for="name">Nome</label>
+                    <input type="text" name="name" id="name" title="Informe o nome do componente"
+                        value="<?php //verifica se a variavel $result possui dados, caso a mesma possua printara o resultado
+                                    if (isset($result)) {
+                                        echo $result['nome'];
+                                    }
+                                    ?>">
+                    <span class="check-message-register hidden">Obrigatório</span>
+                </div>
+                <div class="textboxregister">
+                    <label for="description">Descrição</label>
+                    <input type="text" name="description" id="description" 
+                        title="Deixe aqui uma breve descrição do componente"
                             value="<?php //verifica se a variavel $result possui dados, caso a mesma possua printara o resultado
                                         if (isset($result)) {
-                                            echo $result['nome'];
-                                        }
-                                        ?>">
-                        <span class="check-message-register hidden">Obrigatório</span>
-                    </div>
-                    <div class="textboxregister">
-                        <label for="description">Descrição</label>
-                        <input type="text" name="description" id="description" 
-                            title="Deixe aqui uma breve descrição do componente"
-                                value="<?php //verifica se a variavel $result possui dados, caso a mesma possua printara o resultado
-                                            if (isset($result)) {
-                                                echo $result['descricao'];
-                                            }
-                                        ?>">
-                            <span class="check-message-register hidden">Obrigatório</span>
-                    </div>
-                    <div class="textboxregister">
-                        <label for="amount">Quantidade</label>
-                        <input type="text" name="amount" id="amount" 
-                            title="Quantidade de componente"
-                                value="<?php //verifica se a variavel $result possui dados, caso a mesma possua printara o resultado
-                                            if (isset($result)) {
-                                                echo $result['quantidade'];
-                                            }
-                                        ?>">
-                            <span class="check-message-register hidden">Obrigatório</span>
-                    </div>
-                    <div class="textboxregister">
-                        <label for="localization">Localização</label>
-                        <input type="text" name="localization" id="localization" 
-                            title="Localização do componente"
-                            value="<?php //verifica se a variavel $result possui dados, caso a mesma possua printara o resultado
-                                        if (isset($result)) {
-                                            echo $result['localizacao'];
+                                            echo $result['descricao'];
                                         }
                                     ?>">
-                            <span class="check-message-register hidden">Obrigatório</span>
-                    </div>
-                    <input type="submit" 
-                        value="<?php // trocara o botão de cadastrar pelo de atualizar
+                        <span class="check-message-register hidden">Obrigatório</span>
+                </div>
+                <div class="textboxregister">
+                    <label for="amount">Quantidade</label>
+                    <input type="text" name="amount" id="amount" 
+                        title="Quantidade de componente"
+                            value="<?php //verifica se a variavel $result possui dados, caso a mesma possua printara o resultado
+                                        if (isset($result)) {
+                                            echo $result['quantidade'];
+                                        }
+                                    ?>">
+                        <span class="check-message-register hidden">Obrigatório</span>
+                </div>
+                <div class="textboxregister">
+                    <label for="localization">Localização</label>
+                    <input type="text" name="localization" id="localization" 
+                        title="Localização do componente"
+                        value="<?php //verifica se a variavel $result possui dados, caso a mesma possua printara o resultado
                                     if (isset($result)) {
-                                        echo "Atualizar";
-                                    }else {
-                                        echo "Cadastrar";
+                                        echo $result['localizacao'];
                                     }
-                                ?>" 
-                        name="login" id="login" class="register-btn" disabled>
-                </form>
-            </section>
-            <section id="right" class="col-md-8 Table">
-                <table>
+                                ?>">
+                        <span class="check-message-register hidden">Obrigatório</span>
+                </div>
+                <input type="submit" 
+                    value="<?php // trocara o botão de cadastrar pelo de atualizar
+                                if (isset($result)) {
+                                    echo "Atualizar";
+                                }else {
+                                    echo "Cadastrar";
+                                }
+                            ?>" 
+                    name="login" id="login" class="register-btn" disabled>
+            </form>
+        </div>
+        <div class="rightTable">
+            <table>
                 <?php
                     $dados = $estoque->selectEstoque();
                     //defini o numero de paginas
@@ -234,29 +231,28 @@
                             echo "</tr>";  
                         }
                 ?>
-                </table>
-                <div class="pagina">
-                    <?php
-                        for ($i=1; $i <= $total; $i++){
-                            if ($i ==  $pagina) {
-                                echo ' '.$i.' ';
-                            }else{
-                                    echo ' <a href="? pagina='.$i.'"> '.$i.' </a> ';
-                                }
+            </table>
+            <div class="pagina">
+                <?php
+                    for ($i=1; $i <= $total; $i++){
+                        if ($i ==  $pagina) {
+                            echo ' '.$i.' ';
+                        }else{
+                                echo ' <a href="? pagina='.$i.'"> '.$i.' </a> ';
                             }
-                        }else { // DB vasio
-                            echo "<p class='text-center'>Ops !!! não exixte dados cadastrados.</p>";
                         }
-                    ?>
-                </div>
-                <div class="relatorio col-md-12">
-                    <p>
-                        Clique aqui para gerar o relátorio.
-                        <a target="_brack" href="geradorPdf.php" class="fa fa-file-pdf-o" aria-hidden="true"></a>
-                    </p>
-                </div>
-            </section>
-        </section>
+                    }else { // DB vasio
+                        echo "<p class='text-center'>Ops !!! não existe dados cadastrados.</p>";
+                    }
+                ?>
+            </div>
+            <div class="relatorio">
+                <p>
+                    Clique aqui para gerar o relátorio.
+                    <a target="_brack" href="geradorPdf.php" class="fa fa-file-pdf-o" aria-hidden="true"></a>
+                </p>
+            </div>
+        </div>
     </div>
     <footer class="container-fluid Copy"> 
         <div class="row">

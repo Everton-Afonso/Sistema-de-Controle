@@ -3,6 +3,7 @@
 	margin: 0;
 	padding: 0;
 	box-sizing: border-box;
+	font-family: "Inter", sans-serif;
 }
 @media(max-width: 1080px){
     html {
@@ -31,8 +32,6 @@
 	  
 	background-position: center;
 	background-repeat: no-repeat;
-
-	font-family: "Inter", sans-serif;
 }
 .container {
 	display: flex;
@@ -95,9 +94,6 @@
 .right > form {
 	padding-bottom: 15px;
 }
-.textbox {
-	margin-top: 0.5rem;
-}
 #user,
 #password {
 	width: 24.5rem;
@@ -139,7 +135,7 @@
 }
 .textbox > .check-message {
 	position: absolute;
-	padding-bottom: 10px;
+	padding-bottom: 25px;
 	right: 1rem;
 	color: #ffff00 !important;
 	transform: translateY(-50%);
@@ -147,15 +143,11 @@
 .erro {
 	color: #ffff00;
 	font-size: 1rem;
-	margin-bottom: -12px;
+	margin-bottom: -5px;
 }
-/* menu das telas */
-.container-fluid {
-	font-family: "Inter", sans-serif;
-}
+/* navabar das telas de cadastro e caixas*/
 .NavBarContainer{
     width: 100%;
-    max-width: 1300px;
     margin-right: auto;
     margin-left: auto;
     padding-left: 50px;
@@ -209,28 +201,10 @@
 	background-position: center;
 
 }
-/* corpo das telas */
-.containerTabela {
-	display: flex;
-	background-color: #DCDDE0 !important;
-}
-.card-image .card {
-	min-height: 0;
-}
-.login-form h6 {
-	font-size: 20px;
-	text-transform: uppercase;
-	font-weight: 500;
-}
-
-#left {
-	margin-bottom: 37px;
-}
 .textbox {
 	width: 100%;
 	height: 50px;
 	position: relative;
-	margin-top: 15px;
 }
 .textbox input {
 	width: 100%;
@@ -317,11 +291,26 @@
 .hidden {
 	display: none;
 }
-/* ----------- Tela cadastro -----------  */
+/* ----------- Tela cadastro e login-----------  */
+.flex-container {
+	display: flex;
+	justify-content: center;
+	background-color: #F2F3F5 !important;
+}
+.flex-container > .leftForm {
+	width: 500px;
+	height: 500px;
+}
+.flex-container > .rightTable {
+	width: 900px;
+	height: 600px;
+
+	margin: 10px;
+	padding: 20px;
+}
 .container-register {
 	display: flex;
 }
-/* criado*/
 .alert-erro {
 	background-color: rgba(255, 0, 0, 0.7);
 	padding: 20px 40px;
@@ -411,16 +400,17 @@ select {
 	font-weight: 700;
 	transition: 0.3s linear;
 }
-#right {
-	margin-top: 30px;
+table {
+	border-collapse: collapse;
+	border: 1px solid black;
+	text-align: center;
 }
-tr {
-	line-height: 30px;
+th,td {
+	border: 1px solid black;
 }
 #title-register {
 	font-weight: bold;
 	width: 200px;
-	border: 1px solid rgba(0, 0, 0, 0.3);
 	text-align: center;
 	font-size: 1rem;
 }
@@ -429,10 +419,6 @@ a {
 	padding: 5px;
 	margin: 0px 5px;
 	color: #000;
-}
-td {
-	text-align: center;
-	border: 1px solid rgba(0, 0, 0, 0.3);
 }
 #delete {
 	color: #000;
@@ -496,9 +482,30 @@ td {
 	color: #DCDDE0 ;
 }
 /* responsividade das telas */
-@media(max-width: 350px){
+@media (max-width: 1050px) {
+	/* tela de cadastro e baixas */
+	.flex-container{
+	  display: grid !important;
+	}
+	.flex-container > .leftForm {
+	  display: flex !important;
+	  justify-content: center !important;
+	  align-items: center !important;
+	}
+	.flex-container > .leftForm {
+	  width: 900px !important;
+	}
+	.flex-container > .rightTable {
+	  height: 550px;
+	}
+}
+@media (max-width: 992px) {
 	.right > img {
-		margin-left: 1.2rem;
+		margin-left: 1.6rem;
+	}
+	.container {
+		width: 700px;
+		height: 400px;
 	}
 	#user,
 	#password{
@@ -507,50 +514,42 @@ td {
 		width: 21rem;
 	}
 	.right  > strong {
-		padding-left: 43%;
+		padding-left: 45%;
 	}
 }
-@media(max-width: 400px){
-	.check-message {
-		right: 1.7rem;
-	}
+@media (max-width: 800px){
+	/* tela de login */
 	.right > img {
-		margin-left: 2.5rem;
-	}
-	#user,
-	#password{
-		margin-top: 0.5rem;
-		padding: 0 auto;
-		width: 24.5rem;
-	}
-	.right  > strong {
-		padding-left: 41%;
-	}
-}
-@media(max-width: 500px){
-	.check-message {
-		right: 2.5rem;
+		margin-left: 1.6rem;
 	}
 	.container {
-		width: 600px;
-		height: 350px;
+		width: 700px;
+		height: 400px;
 	}
 	#user,
 	#password{
 		margin-top: 0.5rem;
 		padding: 0 auto;
-		width: 27.5rem;
+		width: 21rem;
 	}
 	.right  > strong {
-		padding-left: 42%;
+		padding-left: 45%;
+	}
+	/* tela de cadastro e baixas */
+	.NavItem:hover {
+		width: 100%;
+		border-bottom: none;
+	}  
+	.flex-container > .leftForm,
+	.rightTable {
+		width: 700px !important;
 	}
 }
-@media(max-width: 600px){
-	.right > img {
-		margin-left: 4.3rem;
+@media(max-width: 771px) {
+	/* tela de login */
+	.textbox {
+		height: 35px;
 	}
-}
-@media(max-width: 700px){
 	.form {
 		display: flex;
 		justify-content: center;
@@ -572,37 +571,126 @@ td {
 		opacity: 0; /* Esconde no desktop. */
     	height: 0;
 	}
-}
-@media (min-width: 768px){
-	.Table {
-		max-width: 100%;
+	.login-btn {
+		margin-top: 8px;
 	}
-	#right {
-		margin-top: 30px;
-		width: 0;
-		height: 0;
-	}
-}
-@media (max-width: 800px){
-	.NavItem:hover {
-		width: 100%;
-		border-bottom: none;
-	}   
 	.right > img {
 		margin-left: 1.6rem;
 	}
 	.container {
-		width: 700px;
-		height: 400px;
-	}
-	.container-register {
-		display: flex;
+		display: flex ;
 		align-items: center;
 		justify-content: center;
-		flex-direction: column;
+		width: 360px;
 	}
-	#right {
-		margin-top: 0;
+	#user,
+	#password{
+		margin-top: 0.5rem;
+		padding: 0 auto;
+		width: 23rem;
+	}
+	.right  > strong {
+		padding-left: 40%;
+	}
+	/* tela de cadastro e baixas */
+	.flex-container > .leftForm,
+	.rightTable {
+		width: 600px !important;
+	}
+	  .flex-container > .rightTable {
+		height: 350px;
+	}
+	table {
+		font-size: 75%;
+	}
+}
+@media(max-width: 600px){
+	.right > img {
+		margin-left: 4.3rem;
+	}
+	.flex-container > .leftForm,
+	.rightTable {
+		width: 550px !important;
+	}
+}
+@media (max-width: 550px) {
+	/* tela de cadastro e baixas */
+	.flex-container > .leftForm,
+	.rightTable {
+	  width: 500px !important;
+	}
+	table {
+	  font-size: 58%;
+	}
+}
+@media(max-width: 500px){
+	/* tela de login */
+	.right > img {
+		margin-left: 2.3rem;
+	}
+	.check-message {
+		right: 2.5rem;
+	}
+	.container {
+		display: flex ;
+		align-items: center;
+		justify-content: center;
+		width: 360px;
+	}
+	#user,
+	#password{
+		margin-top: 0.5rem;
+		padding: 0 auto;
+		width: 24rem;
+	}
+	.right  > strong {
+		padding-left: 42%;
+	}
+	/* tela de cadastro e baixas */
+	.flex-container > .leftForm,
+	.rightTable {
+	  width: 450px !important;
+	}
+}
+@media(max-width: 400px){
+	/* tela de login */
+	.check-message {
+		right: 1.7rem;
+	}
+	.right > img {
+		margin-left: 2.5rem;
+	}
+	#user,
+	#password{
+		margin-top: 0.5rem;
+		padding: 0 auto;
+		width: 24.5rem;
+	}
+	.right  > strong {
+		padding-left: 41%;
+	}
+}
+@media (max-width: 450px) {
+	/* tela de cadastro e baixas */
+	.flex-container > .leftForm,
+	.rightTable {
+	  width: 400px !important;
+	}
+}
+  @media (max-width: 380px) {
+	  /* tela de cadastro e baixas */
+	  .flex-container > .leftForm,
+	  .rightTable {
+	  width: 350px !important;
+	}
+	#title-register {
+		font-size: 0.9rem;
+	}
+}
+@media(max-width: 350px){
+	/* tela de login */
+	.right > img {
+		margin-left: 1.2rem;
 	}
 	#user,
 	#password{
@@ -611,22 +699,6 @@ td {
 		width: 21rem;
 	}
 	.right  > strong {
-		padding-left: 45%;
-	}
-}
-@media(max-width: 911px){
-	.NavBarContainer{
-		padding-left: 30px;
-		padding-right: 30px;
-	}
-}
-@media(max-width: 1440px){
-	.tabelaBaixas{
-		max-width: 850px;
-	}
-	#right {
-		margin-top: 30px;
-		width: 900px;
-		height: 40vw;
+		padding-left: 43%;
 	}
 }

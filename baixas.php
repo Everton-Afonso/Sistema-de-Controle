@@ -31,37 +31,34 @@
 </head>
 <body>
     <header>
-        <div class="container-fluid">
-            <nav class="navbar navbar-expand-lg navbar-light NavBarContainer">
-                <a class="navbar-brand NavLogo" href="#">
-                    <img src="./img/logoIf.png" alt="If">
-                        <p>Bem Vindo
-                            <?php 
-                                $idUser = (int)$_SESSION['id'];
-                                echo $estoque->selectUser($idUser);
-                            ?>
-                        </p>
-                </a>
-                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#menu" aria-controls="menu" aria-expanded="false" aria-label="Toggle navigation">
-                  <span class="navbar-toggler-icon"></span>
-                </button>
-              
-                <div class="collapse navbar-collapse" id="menu">
-                  <ul class="navbar-nav ml-auto">
-                    <li class="nav-item NavItem">
-                      <a class="nav-link active NavLink" href="cadastro.php">Cadastro</a>
+        <nav class="navbar navbar-expand-lg navbar-light NavBarContainer">
+            <a class="navbar-brand NavLogo" href="#">
+                <img src="./img/logoIf.png" alt="If">
+                    <p>Bem Vindo
+                        <?php 
+                            $idUser = (int)$_SESSION['id'];
+                            echo $estoque->selectUser($idUser);
+                        ?>
+                    </p>
+            </a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#menu" aria-controls="menu" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            
+            <div class="collapse navbar-collapse" id="menu">
+                <ul class="navbar-nav ml-auto">
+                <li class="nav-item NavItem">
+                    <a class="nav-link active NavLink" href="cadastro.php">Cadastro</a>
+                </li>
+                <li class="nav-item NavItem">
+                    <a class="nav-link active NavLink" href="logout.php">Sair</a>
                     </li>
-                    <li class="nav-item NavItem">
-                        <a class="nav-link active NavLink" href="logout.php">Sair</a>
-                      </li>
-                  </ul>
-                </div>
-              </nav>
-        </div>
+                </ul>
+            </div>
+            </nav>
     </header>
     <div class="banner"></div>
-    <div class="containerTabela">
-    <section class="container-register row">
+    <div class="flex-container">
         <?php
             if (isset($_POST['idestoque']) || isset($_POST['quantidade']) || isset($_POST['observacao'])) {//clicou no botão cadastrar ou atualizar.
                 //verifica se é o botão atualizar que foi clicado.
@@ -149,7 +146,7 @@
 
             }
         ?>
-        <section id="left" class="col-md-4">
+        <div class="leftForm">
             <form method="POST" class="form-register">
                 <h3>Movimentação</h3>
                 <div class="textboxregister">
@@ -205,9 +202,9 @@
                             ?>"  
                     name="login" id="login" class="register-btn" disabled>
             </form>
-        </section>
-        <section id="right" class="col-md-8">
-            <table class="tabelaBaixas">
+        </div>
+        <div class="rightTable">
+            <table>
                 <?php
                     $dados = $baixas->selectBaixas();
                     //defini o numero de paginas
@@ -296,18 +293,17 @@
                             }
                         }
                     }else { // DB vasio
-                        echo "<p class='text-center'>Ops !!! não exixte dados cadastrados.</p>";
+                        echo "<p class='text-center'>Ops !!! não existe dados cadastrados.</p>";
                     }
                 ?>
             </div>
-        </section>
-        <div class="relatorio col-md-12">
-            <p>
-                Clique aqui para gerar o relátorio de Baixas.
-                <a target="_brack" href="geradorPdf.php?idBaixasPdf=<?php echo "1";?>" class="fa fa-file-pdf-o" aria-hidden="true"></a>
-            </p>
+            <div class="relatorio">
+                <p>
+                    Clique aqui para gerar o relátorio.
+                    <a target="_brack" href="geradorPdf.php" class="fa fa-file-pdf-o" aria-hidden="true"></a>
+                </p>
+            </div>
         </div>
-    </section>
     </div>
     <footer class="container-fluid Copy"> 
         <div class="row">

@@ -16,11 +16,6 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
     <style>
         /* telaExemploPdf.php*/
-        .banner img{
-            margin-top: 20px;
-            margin-bottom: 20px;
-            margin-left: 100px;
-        }
         #text-banner {
             background: rgba(0, 0, 0, 0.5);
             padding-bottom: 15px;
@@ -35,15 +30,16 @@
         #title-register {
             font-weight: bold;
             width: 169px;
-            border: 1px solid rgba(0, 0, 0, 0.3);
             text-align: center;
         }
         table {
             padding-top: 20px;
+            border-collapse: collapse;
+            border: 1px solid black;
+            text-align: center;
         }
         td {
-            text-align: center;
-            border: 1px solid rgba(0, 0, 0, 0.3);
+            border: 1px solid black;
         }
     </style>
 </head>
