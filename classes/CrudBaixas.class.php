@@ -78,10 +78,13 @@
                 $total = $this-> selectQuantidade($idestoque);
 
                 foreach ($total as $key => $value) {
-                    
-                    $result = intval($value['quantidade']) - $quantidade;
-                    $this->atualizaQuantidade($result, $idestoque);
+                    if ($quantidade > intval($value['quantidade'])) {
 
+                        $this->atualizaQuantidade(intval($value['quantidade']), $idestoque);
+                    } else {
+                        $result = intval($value['quantidade']) - $quantidade;
+                        $this->atualizaQuantidade($result, $idestoque);
+                    }
                 }
                 
                 //insert

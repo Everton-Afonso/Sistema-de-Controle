@@ -238,12 +238,61 @@
                 ?>
                             <td>
                                 <a href="baixas.php?id_up=<?php echo $dados[$i]["idbaixas"];?>" id="to-edit">Editar</a>
+                                <a href="?id_delete=<?php echo $dados[$i]["idbaixas"];?>" id="delete">Excluir</a>
                             </td>
                 <?php
                             echo "</tr>";
                         }
                 ?>
             </table>
+            <?php
+                if (isset($_GET['id_delete'])) {
+            ?>
+                    <script type="text/javascript">
+                        $(document).ready(function() {
+                            $('#exampleModalCenter').modal('show');
+                        })
+                    </script>
+                 <!-- Modal -->
+                    <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                        <div class="modal-dialog modal-dialog-centered" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h6 class="modal-title" id="exampleModalLongTitle">Tem certeza de que deseja excluir os dados ?</h6>
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+                                <div class="modal-body">
+                                <?php
+
+                                    $dados = $baixas->selectId((int)$_GET['id_delete']);
+
+                                    if(count($dados) > 0){
+                                        
+                                        echo "<h5> Nome: ".$dados['nome']."</h5>";
+                                        
+                                    }
+                                    $_SESSION["idbaixas"] = $dados["idbaixas"];
+                                ?>
+                                </div>
+                                <div class="modal-body">
+                                    <p>Caso os dados sejam excluidos, não sera possível desfazer essa ação!!.</p>
+                                </div>
+                                <div class="modal-footer justify-content-center">
+                                        <a href="#" class="btn btn-danger" data-dismiss="modal">Não</a>
+                                        <a href="baixas.php?id=<?php echo $_SESSION["idbaixas"];?>" class="btn btn-success">Sim</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+            <?php           
+                }elseif (isset($_GET["id"])) {
+                    $idbaixas = addslashes($_SESSION["idbaixas"]);
+                    $baixas->deleteBaixas($idbaixas);
+                    header("Location: baixas.php");
+                } 
+            ?>
             <div class="pagina">
                 <?php
                         for ($i=1; $i <= $total; $i++){
