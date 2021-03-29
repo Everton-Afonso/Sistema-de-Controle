@@ -8,7 +8,7 @@
     function conexao(){
 
         try {
-            $pdo = new PDO("mysql:dbname=mydb;host=localhost", "root", "root");
+            $pdo = new PDO("mysql:dbname=mydb;host=localhost", "root", "");
             $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
         } catch (PDOException $e) {
             echo "Erro com banco de dados: ".$e->getMessage();
