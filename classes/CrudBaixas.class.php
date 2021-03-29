@@ -16,17 +16,6 @@
             return $result;
 
         }
-        //select limit
-        public function selectBaixasLimit($inicio, $limit){
-
-            $pdo = conexao();
-            $result = array();
-            $select = $pdo->query("SELECT nome, quantidade, motivo, data  FROM baixas INNER JOIN estoque ON 
-            estoque.idestoque = baixas.estoque_idestoque ORDER BY nome LIMIT $inicio, $limit");
-            $result = $select->fetchAll(PDO::FETCH_ASSOC);
-            return $result;
-  
-        }
         //select por id
         public function selectId($id){
 

@@ -25,6 +25,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Rajdhani:wght@600&display=swap" rel="stylesheet" />
     <link rel="stylesheet" href="./css/style.css" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.10.24/css/dataTables.bootstrap4.min.css">
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js" charset="utf-8"></script>
 
@@ -204,46 +205,39 @@
             </form>
         </div>
         <div class="rightTable">
-            <table>
+        <table id="example" class="table table-striped table-bordered">
                 <?php
                     $dados = $baixas->selectBaixas();
-                    //defini o numero de paginas
-                    $limit = 10;
-                    //pagina atual
-                    $pagina = (!isset($_GET['pagina'])) ? 1 : $_GET['pagina'];
-                    $total = ceil((count($dados) / $limit));
-                    $inicio = ($limit * $pagina)-$limit;
-                    
-                    $selectLimit = $baixas->selectBaixasLimit($inicio, $limit);
-                    
-
-                    if(count($dados) > 0){
                 ?>
-                        <tr id="title-register">
-                            <th id="title-register">Nome</th>
-                            <th id="title-register">Quantidade</th> 
-                            <th id="title-register">Motivo</th> 
-                            <th id="title-register">Data</th> 
-                            <th id="title-register">Funções</th>
-                        </tr>
-                <?php        
-                        for ($i=0; $i < count($selectLimit); $i++) { 
-                            $data = implode("/",array_reverse(explode("-",$selectLimit[$i]['data'])));
-                            
-                            echo "<tr>";
-                                echo "<td>".$selectLimit[$i]['nome']."</td>";
-                                echo "<td>".$selectLimit[$i]['quantidade']."</td>";
-                                echo "<td>".$selectLimit[$i]['motivo']."</td>";
-                                echo "<td>".$data."</td>";
-                ?>
+                <thead>
+                    <tr id="title-register">
+                        <th id="title-register">Nome</th>
+                        <th id="title-register">Descrição</th> 
+                        <th id="title-register">Quantidade</th> 
+                        <th id="title-register">Localização</th> 
+                        <th id="title-register">Funções</th> 
+                    </tr>
+                </thead>
+                <tbody>
+                <?php 
+                    for ($i=0; $i < count($dados); $i++) {    
+                        $data = implode("/",array_reverse(explode("-",$dados[$i]['data'])));        
+                        
+                        echo "<tr>";
+                            echo "<td>".$dados[$i]['nome']."</td>";
+                            echo "<td>".$dados[$i]['quantidade']."</td>";
+                            echo "<td>".$dados[$i]['motivo']."</td>";
+                            echo "<td>".$data."</td>";
+                    ?> 
                             <td>
-                                <a href="baixas.php?id_up=<?php echo $dados[$i]["idbaixas"];?>" id="to-edit">Editar</a>
-                                <a href="?id_delete=<?php echo $dados[$i]["idbaixas"];?>" id="delete">Excluir</a>
+                                <a href="baixas.php?id_up=<?php echo $dados[$i]["idBaixas"];?>" id="to-edit">Editar</a>
+                                <a href="?id_delete=<?php echo $dados[$i]["idBaixas"];?>" id="delete">Excluir</a>
                             </td>
-                <?php
-                            echo "</tr>";
-                        }
-                ?>
+                    <?php     
+                                echo "</tr>";  
+                            }
+                    ?>
+                </tbody>
             </table>
             <?php
                 if (isset($_GET['id_delete'])) {
@@ -273,7 +267,7 @@
                                         echo "<h5> Nome: ".$dados['nome']."</h5>";
                                         
                                     }
-                                    $_SESSION["idbaixas"] = $dados["idbaixas"];
+                                    $_SESSION["idbaixas"] = $dados["idBaixas"];
                                 ?>
                                 </div>
                                 <div class="modal-body">
@@ -293,24 +287,10 @@
                     header("Location: baixas.php");
                 } 
             ?>
-            <div class="pagina">
-                <?php
-                        for ($i=1; $i <= $total; $i++){
-                            if ($i ==  $pagina) {
-                                echo ' '.$i.' ';
-                            }else{
-                                echo ' <a href="? pagina='.$i.'"> '.$i.' </a> ';
-                            }
-                        }
-                    }else { // DB vasio
-                        echo "<p class='text-center'>Ops !!! não existe dados cadastrados.</p>";
-                    }
-                ?>
-            </div>
             <div class="relatorio">
-                <p>
+            <p>
                     Clique aqui para gerar o relátorio.
-                    <a target="_brack" href="geradorPdf.php" class="fa fa-file-pdf-o" aria-hidden="true"></a>
+                    <a target="_brack" href="geradorPdf.php?idBaixasPdf=<?php echo 1;?>" class="fa fa-file-pdf-o" aria-hidden="true"></a>
                 </p>
             </div>
         </div>
@@ -363,6 +343,11 @@
         integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
         crossorigin="anonymous"
     ></script>
+
+    <script src="https://cdn.datatables.net/1.10.24/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/1.10.24/js/dataTables.bootstrap4.min.js"></script>
+    
+    <script src="language_DataTable/pt_br.js"></script>
 </body>
 </html>
 <?php

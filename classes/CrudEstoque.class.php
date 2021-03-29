@@ -83,17 +83,6 @@
             return $result;
 
         }
-        //select limit
-        public function selectEstuqueLimit($inicio, $limit){
-
-          $pdo = conexao();
-          $result = array();
-          $select = $pdo->query("SELECT idestoque, nome, descricao, quantidade, localizacao 
-          FROM estoque ORDER BY nome LIMIT $inicio, $limit");
-          $result = $select->fetchAll(PDO::FETCH_ASSOC);
-          return $result;
-
-      }
         //select por id
         public function selectId($id){
 
