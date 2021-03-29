@@ -11,7 +11,7 @@
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
-    <meta charset="UTF-8">
+<meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Cadastro</title>
@@ -27,7 +27,8 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Rajdhani:wght@600&display=swap" rel="stylesheet" />
     <link rel="stylesheet" href="./css/style.css" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.10.24/css/dataTables.bootstrap4.min.css">
+    
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js" charset="utf-8"></script>
 
 </head>
@@ -162,7 +163,7 @@
                 </div>
                 <div class="textboxregister">
                     <label for="amount">Quantidade</label>
-                    <input type="text" name="amount" id="amount" 
+                    <input type="number" name="amount" id="amount" 
                         title="Quantidade de componente"
                             value="<?php //verifica se a variavel $result possui dados, caso a mesma possua printara o resultado
                                         if (isset($result)) {
@@ -194,58 +195,38 @@
             </form>
         </div>
         <div class="rightTable">
-            <table>
+            <table id="example" class="table table-striped table-bordered">
                 <?php
                     $dados = $estoque->selectEstoque();
-                    //defini o numero de paginas
-                    $limit = 10;
-                    //pagina atual
-                    $pagina = (!isset($_GET['pagina'])) ? 1 : $_GET['pagina'];
-                    $total = ceil((count($dados) / $limit));
-                    $inicio = ($limit * $pagina)-$limit;
-                    
-                    $selectLimit = $estoque->selectEstuqueLimit($inicio, $limit);
-
-                    if(count($dados) > 0){
                 ?>
-                        <tr id="title-register">
-                            <th id="title-register">Nome</th>
-                            <th id="title-register">Descrição</th> 
-                            <th id="title-register">Quantidade</th> 
-                            <th id="title-register">Localização</th> 
-                            <th id="title-register">Funções</th> 
-                        </tr>
+                <thead>
+                    <tr id="title-register">
+                        <th id="title-register">Nome</th>
+                        <th id="title-register">Descrição</th> 
+                        <th id="title-register">Quantidade</th> 
+                        <th id="title-register">Localização</th> 
+                        <th id="title-register">Funções</th> 
+                    </tr>
+                </thead>
+                <tbody>
                 <?php 
-                    for ($i=0; $i < count($selectLimit); $i++) {            
-                        echo "<tr>";
-                        foreach ($selectLimit[$i] as $key => $value) {
-                            if ($key != "idestoque" && $key != "usuario_idusuario") {
-                                echo "<td>".$value."</td>";
+                    for ($i=0; $i < count($dados); $i++) {            
+                            echo "<tr>";
+                            foreach ($dados[$i] as $key => $value) {
+                                if ($key != "idestoque" && $key != "usuario_idusuario") {
+                                    echo "<td>".$value."</td>";
+                                }
                             }
-                        }
-                ?> 
-                        <td>
-                            <a href="cadastro.php?id_up=<?php echo $dados[$i]["idestoque"];?>" id="to-edit">Editar</a>
-                        </td> 
-                <?php     
-                            echo "</tr>";  
-                        }
-                ?>
+                    ?> 
+                            <td>
+                                <a href="cadastro.php?id_up=<?php echo $dados[$i]["idestoque"];?>" id="to-edit">Editar</a>
+                            </td> 
+                    <?php     
+                                echo "</tr>";  
+                            }
+                    ?>
+                </tbody>
             </table>
-            <div class="pagina">
-                <?php
-                    for ($i=1; $i <= $total; $i++){
-                        if ($i ==  $pagina) {
-                            echo ' '.$i.' ';
-                        }else{
-                                echo ' <a href="? pagina='.$i.'"> '.$i.' </a> ';
-                            }
-                        }
-                    }else { // DB vasio
-                        echo "<p class='text-center'>Ops !!! não existe dados cadastrados.</p>";
-                    }
-                ?>
-            </div>
             <div class="relatorio">
                 <p>
                     Clique aqui para gerar o relátorio.
@@ -287,22 +268,15 @@
             }
         });
     </script>
-    <script
-        src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
-        integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
-        crossorigin="anonymous"
-    ></script>
-    <script
-        src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
-        integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
-        crossorigin="anonymous"
-    ></script>
-    <script
-        src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
-        integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
-        crossorigin="anonymous"
-    ></script>
-</body>
+
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+
+    <script src="https://cdn.datatables.net/1.10.24/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/1.10.24/js/dataTables.bootstrap4.min.js"></script>
+    
+    <script src="language_DataTable/pt_br.js"></script>
 </html>
 <?php
     ob_end_flush();
